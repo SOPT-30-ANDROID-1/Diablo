@@ -18,8 +18,8 @@
 ### LEVEL1.
 
 - 아이디,비밀번호 모두 입력이 되어있을때만 로그인 버튼을 눌렀을 때 `HomeActivity`로 이동
+    - `isNotEmpty()` 함수 활용
 - 회원가입 버튼을 클릭시 `SignUpActivity`로 이동
-
     ```kotlin
     private fun initView() {
         binding.btnLogin.setOnClickListener {
@@ -50,7 +50,9 @@
 
 - 회원가입(SignUpActivity)이 성공한다면, 이전 로그인 화면으로 돌아옵니다.
 - 이 때, 회원가입에서 입력했던 아이디와 비밀번호가 입력되어 있어야 합니다.
-    [ SingUpActivity (정보를 주는 쪽) ]
+
+    [ SingUpActivity (보내는 쪽) ]
+    - `putExtra`로 data 넘겨주기
     ```kotlin
     private fun initView() {
         binding.btnSignup.setOnClickListener {
@@ -69,7 +71,10 @@
     }
     ```
 
-    [ LoginActivity (정보를 받는 쪽) ]
+    [ LoginActivity (받는 쪽) ]
+    - `registerForActivityResult`로 정보 받아오기
+         - `registerForActivityResult`에서는 `launch`를 사용해준다.
+         - `registerForActivityResult`의 콜백함수에 데이터를 받아 할 일들을 적어준다.
     ```kotlin
     private val signUpActivityLauncher = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
@@ -84,3 +89,62 @@
         }
     }
     ```
+    ```kotlin
+    // initView 함수 내
+    binding.btnSingup.setOnClickListener {
+        val intent = Intent(this, SignUpActivity::class.java)
+        signUpActivityLauncher.launch(intent)
+    }
+    ```
+
+- 사진의 비율을 1:1로 만들어주세요.
+    - `constraintDimensionRatio` 활용
+    ```xml
+    <ImageView
+        android:id="@+id/iv_profile"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="30dp"
+        android:src="@drawable/ic_launcher_background"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.3" />
+    ```
+
+- 자기소개에 스크롤뷰 적용
+    - `NestedScrollView` 활용
+        - ScrollView의 parent는 ConstraintLayout이므로, 제약 필수
+        - TextView의 parent는 ScrollView이므로 제약 없어도 됨
+    ```xml
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scroll_introduction"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginHorizontal="30dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="30dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_mbti">
+        
+        <TextView
+            android:id="@+id/tv_introduction"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="블라블라~"
+            android:textColor="@color/dark_navy"
+            android:textSize="17sp" />
+        
+    </androidx.core.widget.NestedScrollView>
+    
+    ```
+
+### 구현화면
+
+| 로그인 | 회원가입 | 스크롤뷰 |
+| :---: | :---: | :---: |
+|<img width="100%" src="https://user-images.githubusercontent.com/71129059/162563940-2526fc1a-27a6-4d91-b6fb-d9d8df264fa4.gif">|<img width="100%" src="https://user-images.githubusercontent.com/71129059/162563943-612853ff-0426-4cc2-b281-bdbfc828c599.gif">|<img width="100%" src="https://user-images.githubusercontent.com/71129059/162564039-001b6836-4d70-434c-9496-bafbcd1682e5.gif">|
+|
