@@ -12,11 +12,11 @@
         android:layout_height="0dp"
         android:layout_marginTop="30dp"
         android:src="@drawable/ic_launcher_background"
+        app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintWidth_percent="0.3"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.3" />
 
     <TextView
         android:id="@+id/tv_name"
@@ -64,6 +64,7 @@
         android:textSize="17sp"
         app:layout_constraintStart_toEndOf="@id/tv_age"
         app:layout_constraintTop_toTopOf="@id/tv_age" />
+
     <TextView
         android:id="@+id/tv_mbti"
         android:layout_width="wrap_content"
@@ -92,21 +93,21 @@
         android:id="@+id/scroll_introduction"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginHorizontal="30dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_mbti"
         android:layout_marginTop="15dp"
         android:layout_marginBottom="30dp"
-        >
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_mbti">
+
         <TextView
             android:id="@+id/tv_introduction"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="dalkjvklaaklvdjalksdvnklanvklanvdlkanklvdnalvkdnakldvnaklndvklandvklanvdklankdlsvnalkdvnlakndvlkandvlkandlvkna\ndalkjvklaaklvdjalksdvnklanvklanvdlkanklvdnalvkdnakldvnaklndvklandvklanvdklankdlsvnalkdvnlakndvlkandvlkandlvkna\ndalkjvklaaklvdjalksdvnklanvklanvdlkanklvdnalvkdnakldvnaklndvklandvklanvdklankdlsvnalkdvnlakndvlkandvlkandlvkna\ndalkjvklaaklvdjalksdvnklanvklanvdlkanklvdnalvkdnakldvnaklndvklandvklanvdklankdlsvnalkdvnlakndvlkandvlkandlvkna\ndalkjvklaaklvdjalksdvnklanvklanvdlkanklvdnalvkdnakldvnaklndvklandvklanvdklankdlsvnalkdvnlakndvlkandvlkandlvkna\ndalkjvklaaklvdjalksdvnklanvklanvdlkanklvdnalvkdnakldvnaklndvklandvklanvdklankdlsvnalkdvnlakndvlkandvlkandlvkna\ndalkjvklaaklvdjalksdvnklanvklanvdlkanklvdnalvkdnakldvnaklndvklandvklanvdklankdlsvnalkdvnlakndvlkandvlkandlvkna\ndalkjvklaaklvdjalksdvnklanvklanvdlkanklvdnalvkdnakldvnaklndvklandvklanvdklankdlsvnalkdvnlakndvlkandvlkandlvkna\ndalkjvklaaklvdjalksdvnklanvklanvdlkanklvdnalvkdnakldvnaklndvklandvklanvdklankdlsvnalkdvnlakndvlkandvlkandlvkna\n"
-            android:textSize="17sp"
-            android:textColor="@color/dark_navy"/>
+            android:text="dalkjvklaaklvdjalksdvnklanvklanvdlkanklvdnalvkdnakldvnaklndvklandvklanvdklankdlsvnalkdvnlakndvlkandvlkandlvknadalkjvklaaklvdjalksdvnklanvklanvdlkanklvdnalvkdnakldvnaklndvklandvklanvdklankdlsvnalkdvnlakndvlkandvlkandlvkna\ndalkjvklaaklvdjalksdvnklanvklanvdlkanklvdnalvkdnakldvnaklndvklandvklanvdklankdlsvnalkdvnlakndvlkandvlkandlvkna\ndalkjvklaaklvdjalksdvnklanvklanvdlkanklvdnalvkdnakldvnaklndvklandvklanvdklankdlsvnalkdvnlakndvlkandvlkandlvkna\ndalkjvklaaklvdjalksdvnklanvklanvdlkanklvdnalvkdnakldvnaklndvklandvklanvdklankdlsvnalkdvnlakndvlkandvlkandlvkna\ndalkjvklaaklvdjalksdvnklanvklanvdlkanklvdnalvkdnakldvnaklndvklandvklanvdklankdlsvnalkdvnlakndvlkandvlkandlvkna\ndalkjvklaaklvdjalksdvnklanvklanvdlkanklvdnalvkdnakldvnaklndvklandvklanvdklankdlsvnalkdvnlakndvlkandvlkandlvkna\ndalkjvklaaklvdjalksdvnklanvklanvdlkanklvdnalvkdnakldvnaklndvklandvklanvdklankdlsvnalkdvnlakndvlkandvlkandlvkna\ndalkjvklaaklvdjalksdvnklanvklanvdlkanklvdnalvkdnakldvnaklndvklandvklanvdklankdlsvnalkdvnlakndvlkandvlkandlvkna\ndalkjvklaaklvdjalksdvnklanvklanvdlkanklvdnalvkdnakldvnaklndvklandvklanvdklankdlsvnalkdvnlakndvlkandvlkandlvkna\n"
+            android:textColor="@color/dark_navy"
+            android:textSize="17sp" />
 
     </androidx.core.widget.NestedScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
