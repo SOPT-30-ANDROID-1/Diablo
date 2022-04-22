@@ -10,11 +10,16 @@
 
 | Week  |            Contents            |   Date   |                    Summary                    | Check |
 | :---: | :----------------------------: | :------: | :-------------------------------------------: | :---: |
-| 1주차 |    안드로이드 기초와 View/ViewGroup     | 22/04/02 | [1st Seminar](#seminar1) |  ✅   |
-| 2주차 |    Fragment와 Recycler View     | 22/04/09 |  |     |
+| 1주차 |    안드로이드 기초와 View/ViewGroup     | 22/04/02 |[1st Seminar](#seminar1)|  ✅   |
+| 2주차 |    Fragment와 Recycler View     | 22/04/09 |[2nd Seminar](#seminar2)|✅   |
 ---
 
 ## seminar1
+### 구현화면
+
+| 로그인 | 회원가입 | 스크롤뷰 |
+| :---: | :---: | :---: |
+|<img width="100%" src="https://user-images.githubusercontent.com/71129059/162563940-2526fc1a-27a6-4d91-b6fb-d9d8df264fa4.gif">|<img width="100%" src="https://user-images.githubusercontent.com/71129059/162563943-612853ff-0426-4cc2-b281-bdbfc828c599.gif">|<img width="100%" src="https://user-images.githubusercontent.com/71129059/162564039-001b6836-4d70-434c-9496-bafbcd1682e5.gif">|
 ### LEVEL1.
 
 - 아이디,비밀번호 모두 입력이 되어있을때만 로그인 버튼을 눌렀을 때 `HomeActivity`로 이동
@@ -142,8 +147,131 @@
     
     ```
 
+
+
+---
+## seminar2
 ### 구현화면
 
-| 로그인 | 회원가입 | 스크롤뷰 |
-| :---: | :---: | :---: |
-|<img width="100%" src="https://user-images.githubusercontent.com/71129059/162563940-2526fc1a-27a6-4d91-b6fb-d9d8df264fa4.gif">|<img width="100%" src="https://user-images.githubusercontent.com/71129059/162563943-612853ff-0426-4cc2-b281-bdbfc828c599.gif">|<img width="100%" src="https://user-images.githubusercontent.com/71129059/162564039-001b6836-4d70-434c-9496-bafbcd1682e5.gif">|
+| Fragment 전환 | 디테일뷰 |
+| :---: | :---: |
+|
+<img width="100%" src="https://user-images.githubusercontent.com/71129059/164742749-0bc2eded-49d1-4a7b-99c1-4750597f74be.gif">|<img width="100%" src="https://user-images.githubusercontent.com/71129059/164742733-09595e12-fa47-42ed-9bb1-c68b824b3c41.gif">|
+
+https://user-images.githubusercontent.com/71129059/164742749-0bc2eded-49d1-4a7b-99c1-4750597f74be.gif
+### LEVEL1.
+
+- 자기소개 페이지를 만든 HomeActivity 하단에 FollowerRecyclerView, RepositoryRecyclerView 만들기
+- HomeActivity 하단에 NestedScrollView로 FragmentContainerView 지정
+- FollowerListFragment와 RepoListFragment 사용
+    ```xml
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginVertical="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/btn_repo"
+        app:layout_constraintStart_toStartOf="@id/btn_follower"
+        app:layout_constraintTop_toBottomOf="@id/btn_follower">
+
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/container_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </androidx.core.widget.NestedScrollView>
+    ```
+- 버튼 클릭시 FollowerListFragment와 RepoListFragment로 이동하도록 설정
+    ```kotlin
+
+    private fun initTransactionEvent() {
+        val followerListFragment = FollowerListFragment()
+        val repositoryListFragment = RepoListFragment()
+        supportFragmentManager.beginTransaction().add(R.id.container_list, followerListFragment).commit()
+
+        binding.apply {
+            btnFollower.setOnClickListener {
+                if (position == REPO_POSITION) {
+                    fragmentManage(followerListFragment, FOLLOWER_POSITION)
+                }
+            }
+            btnRepo.setOnClickListener{
+                if (position == FOLLOWER_POSITION) {
+                    fragmentManage(repositoryListFragment, REPO_POSITION)
+                }
+            }
+        }
+    }
+
+    private fun fragmentManage(fragment: Fragment, pos: Int) {
+        supportFragmentManager.beginTransaction().replace(R.id.container_list, fragment).commit()
+        position = pos
+    }
+
+    companion object {
+        const val FOLLOWER_POSITION = 1
+        const val REPO_POSITION = 2
+    }
+    ```
+
+
+### LEVEL2.
+
+- 아이템 클릭시 상세설명을 보여주는 Activity로 이동하기
+    ```kotlin
+    // FollowerAdapter.kt
+        interface ItemClickListener {
+        fun onClick(data: UserData)
+    }
+
+    fun setItemClickListener(itemClickListener: ItemClickListener) {
+        this.itemClickListener = itemClickListener
+    }
+    ```
+    ```kotlin
+    // FollowerListFragment.kt
+    private fun listClickEvent() {
+        followerAdapter.setItemClickListener(object : FollowerAdapter.ItemClickListener {
+            override fun onClick(data: UserData) {
+                val intent = Intent(requireContext(), DetailActivity::class.java).apply {
+                    putExtra("profile", data.profile)
+                    putExtra("name", data.name)
+                    putExtra("introduction", data.introduction)
+                    addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                }
+                startActivity(intent)
+            }
+        })
+    }
+    ```
+    ```kotlin
+    // DetailActivity.kt
+    private fun initData() {
+        binding.ivProfile.setImageResource(intent.getIntExtra("name", R.drawable.ic_launcher_background))
+        binding.tvNameContent.text = intent.getStringExtra("name")
+        binding.tvIntroductionContent.text = intent.getStringExtra("introduction")
+    }
+    ```
+
+- itemDecoration을 통해 리스트 간 간격 주기
+
+    ```kotlin
+    class GridSpaceDecoration(private val margin: Int) : RecyclerView.ItemDecoration() {
+    override fun getItemOffsets(
+        outRect: Rect,
+        view: View,
+        parent: RecyclerView,
+        state: RecyclerView.State
+    ) {
+        when(parent.getChildAdapterPosition(view) % 2) {
+            0 -> {
+                outRect.right = Math.ceil(margin.toDouble() / 2).toInt()
+            }
+            1 -> {
+                outRect.left = Math.floor(margin.toDouble() / 2).toInt()
+            }
+        }
+        outRect.bottom = margin
+        }
+    }
+    ```
