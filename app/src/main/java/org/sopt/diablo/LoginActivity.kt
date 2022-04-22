@@ -12,14 +12,13 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityLoginBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        binding = ActivityLoginBinding.inflate(layoutInflater).also { setContentView(it.root) }
         initView()
     }
 
     private fun initView() {
         binding.btnLogin.setOnClickListener {
-            if (checkInput()) {
+            if (isLoginFormsValid) {
                 Toast.makeText(this, "로그인 성공", Toast.LENGTH_SHORT).show()
                 Intent(this, HomeActivity::class.java).apply {
                     startActivity(this)
@@ -36,9 +35,8 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    private fun checkInput(): Boolean {
-        return binding.etId.text.isNotEmpty() && binding.etPw.text.isNotEmpty()
-    }
+    private val isLoginFormsValid: Boolean
+        get() = binding.etId.text.isNotEmpty() && binding.etPw.text.isNotEmpty()
 
     private val signUpActivityLauncher = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
