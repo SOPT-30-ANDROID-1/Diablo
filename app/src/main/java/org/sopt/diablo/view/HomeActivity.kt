@@ -6,14 +6,14 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import org.sopt.diablo.R
 import org.sopt.diablo.databinding.ActivityHomeBinding
+import org.sopt.diablo.databinding.ActivityLoginBinding
 
 class HomeActivity : AppCompatActivity() {
     private var position = FOLLOWER_POSITION
     private lateinit var binding: ActivityHomeBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityHomeBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        binding = ActivityHomeBinding.inflate(layoutInflater).also { setContentView(it.root) }
         initTransactionEvent()
     }
 
