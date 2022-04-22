@@ -29,7 +29,7 @@ class FollowerListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initAdapter()
-        listClickEvent()
+        itemClickEvent()
     }
 
 
@@ -61,7 +61,7 @@ class FollowerListFragment : Fragment() {
         }
     }
 
-    private fun listClickEvent() {
+    private fun itemClickEvent() {
         followerAdapter.setItemClickListener(object : FollowerAdapter.ItemClickListener {
             override fun onClick(data: UserData) {
                 val intent = Intent(requireContext(), DetailActivity::class.java).apply {

@@ -14,8 +14,10 @@ class DetailActivity : AppCompatActivity() {
     }
 
     private fun initData() {
-        binding.ivProfile.setImageResource(intent.getIntExtra("name", R.drawable.ic_launcher_background))
-        binding.tvNameContent.text = intent.getStringExtra("name")
-        binding.tvIntroductionContent.text = intent.getStringExtra("introduction")
+        binding.apply{
+            ivProfile.setImageResource(intent.getIntExtra("name", R.drawable.ic_launcher_background))
+            tvNameContent.text = intent.getStringExtra("name")
+            tvIntroductionContent.text = intent.getStringExtra("introduction")
+        }
     }
 }
