@@ -4,14 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/shape_bg_light_gray_button"
-    android:padding="20dp">
+    android:paddingVertical="25dp"
+    android:paddingStart="21dp">
 
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/iv_profile"
         android:layout_width="50dp"
         android:layout_height="0dp"
-        android:src="@drawable/ic_launcher_background"
+        android:src="@drawable/ic_profile_image"
+        app:civ_border_color="@color/sopt_gray"
+        app:civ_border_width="1dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintStart_toStartOf="parent"
@@ -21,10 +23,11 @@
         android:id="@+id/tv_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:textColor="@color/dark_navy"
-        android:textSize="17sp"
-        android:textStyle="bold"
+        android:layout_marginStart="22dp"
+        android:fontFamily="@font/notosanskr_bold"
+        android:includeFontPadding="false"
+        android:textColor="@color/sopt_black"
+        android:textSize="16sp"
         app:layout_constraintStart_toEndOf="@id/iv_profile"
         app:layout_constraintTop_toTopOf="@id/iv_profile"
         tools:text="정설희" />
@@ -33,11 +36,13 @@
         android:id="@+id/tv_introduction"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:textColor="@color/dark_navy"
+        android:fontFamily="@font/notosanskr_regular"
+        android:includeFontPadding="false"
+        android:textColor="@color/sopt_dark_gray"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="@id/iv_profile"
         app:layout_constraintStart_toEndOf="@id/iv_profile"
+        app:layout_constraintStart_toStartOf="@+id/tv_name"
         app:layout_constraintTop_toBottomOf="@id/tv_name"
         tools:text="안드로이드 파트원" />
 

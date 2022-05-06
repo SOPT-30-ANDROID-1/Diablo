@@ -6,9 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import org.sopt.diablo.R
-import org.sopt.diablo.databinding.FragmentCameraBinding
 import org.sopt.diablo.databinding.FragmentProfileBinding
+
 class ProfileFragment: Fragment() {
+    private var position = HomeActivity.FOLLOWER_POSITION
     private var _binding: FragmentProfileBinding? = null
     private val binding get() = _binding ?: error("Binding이 초기화 되지 않았습니다")
 
@@ -22,5 +23,46 @@ class ProfileFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initTransactionEvent()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
+    private fun initTransactionEvent() {
+        val followerListFragment = FollowerListFragment()
+        val repositoryListFragment = RepoListFragment()
+        childFragmentManager.beginTransaction().add(R.id.container_list, followerListFragment).commit()
+        binding.btnFollower.isSelected = true
+        binding.btnRepo.isSelected = false
+
+        with(binding) {
+            btnFollower.setOnClickListener {
+                if (position == REPO_POSITION) {
+                    fragmentManage(followerListFragment, FOLLOWER_POSITION)
+                }
+            }
+            btnRepo.setOnClickListener{
+                if (position == FOLLOWER_POSITION) {
+                    fragmentManage(repositoryListFragment, REPO_POSITION)
+                }
+            }
+        }
+    }
+
+    private fun fragmentManage(fragment: Fragment, pos: Int) {
+        childFragmentManager.beginTransaction().replace(R.id.container_list, fragment).commit()
+        with(binding) {
+            btnFollower.isSelected = !btnFollower.isSelected
+            btnRepo.isSelected = !btnRepo.isSelected
+        }
+        position = pos
+    }
+
+    companion object {
+        const val FOLLOWER_POSITION = 1
+        const val REPO_POSITION = 2
     }
 }

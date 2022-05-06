@@ -16,7 +16,7 @@ import org.sopt.diablo.databinding.ItemFollowerListBinding
 class FollowerListFragment : Fragment() {
     private lateinit var followerAdapter: FollowerAdapter
     private var _binding: FragmentFollowerListBinding? = null
-    private val binding get() = _binding?: error("Binding이 초기화 되지 않았습니다")
+    private val binding get() = _binding ?: error("Binding이 초기화 되지 않았습니다")
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,7 +31,6 @@ class FollowerListFragment : Fragment() {
         initAdapter()
         setOnItemClickListener()
     }
-
 
     override fun onDestroyView() {
         super.onDestroyView()
