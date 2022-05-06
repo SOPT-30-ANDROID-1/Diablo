@@ -42,8 +42,8 @@
         <entry key="app/src/main/res/layout/fragmnet_profile_follower.xml" value="0.2796875" />
         <entry key="app/src/main/res/layout/fragmnet_profile_followeraaa.xml" value="0.2796875" />
         <entry key="app/src/main/res/layout/item_follower_list.xml" value="0.37345581054687504" />
-        <entry key="app/src/main/res/layout/item_profile_follower.xml" value="0.2796875" />
-        <entry key="app/src/main/res/layout/item_profile_repo.xml" value="0.13541666666666666" />
+        <entry key="app/src/main/res/layout/item_profile_follower.xml" value="0.77423095703125" />
+        <entry key="app/src/main/res/layout/item_profile_repo.xml" value="0.21962616775209537" />
         <entry key="app/src/main/res/layout/item_repo_list.xml" value="0.2796875" />
         <entry key="app/src/main/res/menu/menu_list.xml" value="0.18958333333333333" />
       </map>

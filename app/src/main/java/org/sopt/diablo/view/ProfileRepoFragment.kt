@@ -33,7 +33,6 @@ class ProfileRepoFragment : Fragment() {
     }
 
     private fun initAdapter() {
-        val customDecoration = GridSpaceDecoration(50)
         repoAdapter = RepoAdapter().apply {
             repoList.addAll(
                 listOf(
@@ -52,10 +51,7 @@ class ProfileRepoFragment : Fragment() {
             )
             notifyDataSetChanged()
         }
-        binding.rvRepoList.apply {
-            addItemDecoration(customDecoration)
-            adapter = repoAdapter
-        }
+        binding.rvRepoList.adapter = repoAdapter
     }
 
 }
