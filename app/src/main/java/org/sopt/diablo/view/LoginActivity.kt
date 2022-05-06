@@ -29,7 +29,7 @@ class LoginActivity : AppCompatActivity() {
             }
         }
 
-        binding.btnSingup.setOnClickListener {
+        binding.btnSignup.setOnClickListener {
             val intent = Intent(this, SignUpActivity::class.java)
             signUpActivityLauncher.launch(intent)
         }
