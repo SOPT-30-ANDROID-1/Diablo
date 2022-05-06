@@ -32,21 +32,21 @@ class ProfileFragment: Fragment() {
     }
 
     private fun initTransactionEvent() {
-        val followerListFragment = FollowerListFragment()
-        val repositoryListFragment = RepoListFragment()
-        childFragmentManager.beginTransaction().add(R.id.container_list, followerListFragment).commit()
+        val followerFragment = ProfileFollowerFragment()
+        val repoFragment = ProfileRepoFragment()
+        childFragmentManager.beginTransaction().add(R.id.container_list, followerFragment).commit()
         binding.btnFollower.isSelected = true
         binding.btnRepo.isSelected = false
 
         with(binding) {
             btnFollower.setOnClickListener {
                 if (position == REPO_POSITION) {
-                    fragmentManage(followerListFragment, FOLLOWER_POSITION)
+                    fragmentManage(followerFragment, FOLLOWER_POSITION)
                 }
             }
             btnRepo.setOnClickListener{
                 if (position == FOLLOWER_POSITION) {
-                    fragmentManage(repositoryListFragment, REPO_POSITION)
+                    fragmentManage(repoFragment, REPO_POSITION)
                 }
             }
         }

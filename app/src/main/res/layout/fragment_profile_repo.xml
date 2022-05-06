@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.FollowerListFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".view.ProfileRepoFragment">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_follower_list"
+        android:id="@+id/rv_repo_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/item_follower_list" />
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:spanCount="2"
+        tools:listitem="@layout/item_profile_repo" />
+
 
 </FrameLayout>

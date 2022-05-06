@@ -4,13 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingVertical="25dp"
-    android:paddingStart="21dp">
+    android:paddingTop="25dp">
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/iv_profile"
         android:layout_width="50dp"
         android:layout_height="0dp"
+        android:layout_marginStart="21dp"
+        android:layout_marginBottom="25dp"
         android:src="@drawable/ic_profile_image"
         app:civ_border_color="@color/sopt_gray"
         app:civ_border_width="1dp"
@@ -45,5 +46,12 @@
         app:layout_constraintStart_toStartOf="@+id/tv_name"
         app:layout_constraintTop_toBottomOf="@id/tv_name"
         tools:text="안드로이드 파트원" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="25dp"
+        android:background="@color/sopt_gray"
+        app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

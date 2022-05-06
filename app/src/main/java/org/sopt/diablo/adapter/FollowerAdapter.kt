@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import org.sopt.diablo.data.UserData
-import org.sopt.diablo.databinding.ItemFollowerListBinding
+import org.sopt.diablo.databinding.ItemProfileFollowerBinding
 
 class FollowerAdapter: RecyclerView.Adapter<FollowerAdapter.FollowerViewHolder>() {
     val userList = mutableListOf<UserData>()
@@ -12,7 +12,7 @@ class FollowerAdapter: RecyclerView.Adapter<FollowerAdapter.FollowerViewHolder>(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FollowerViewHolder {
         val binding =
-            ItemFollowerListBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            ItemProfileFollowerBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return FollowerViewHolder(binding, itemClickListener)
     }
 
@@ -23,7 +23,7 @@ class FollowerAdapter: RecyclerView.Adapter<FollowerAdapter.FollowerViewHolder>(
     override fun getItemCount(): Int = userList.size
 
     class FollowerViewHolder(
-        private val binding: ItemFollowerListBinding,
+        private val binding: ItemProfileFollowerBinding,
         private val itemClickListener: ItemClickListener
     ) : RecyclerView.ViewHolder(binding.root) {
         fun onBind(data: UserData) {

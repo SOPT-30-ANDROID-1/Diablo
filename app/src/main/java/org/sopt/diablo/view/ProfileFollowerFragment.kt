@@ -10,19 +10,19 @@ import androidx.recyclerview.widget.RecyclerView
 import org.sopt.diablo.R
 import org.sopt.diablo.adapter.FollowerAdapter
 import org.sopt.diablo.data.UserData
-import org.sopt.diablo.databinding.FragmentFollowerListBinding
-import org.sopt.diablo.databinding.ItemFollowerListBinding
+import org.sopt.diablo.databinding.FragmentProfileFollowerBinding
+import org.sopt.diablo.databinding.FragmentProfileRepoBinding
 
-class FollowerListFragment : Fragment() {
+class ProfileFollowerFragment : Fragment() {
     private lateinit var followerAdapter: FollowerAdapter
-    private var _binding: FragmentFollowerListBinding? = null
+    private var _binding: FragmentProfileFollowerBinding? = null
     private val binding get() = _binding ?: error("Binding이 초기화 되지 않았습니다")
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentFollowerListBinding.inflate(layoutInflater, container, false)
+        _binding = FragmentProfileFollowerBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
 
@@ -38,7 +38,6 @@ class FollowerListFragment : Fragment() {
     }
 
     private fun initAdapter() {
-        val customDecoration = LinearSpaceDecoration(50)
         followerAdapter = FollowerAdapter().apply {
             userList.addAll(
                 listOf(
@@ -54,10 +53,7 @@ class FollowerListFragment : Fragment() {
             )
             notifyDataSetChanged()
         }
-        binding.rvFollowerList.apply {
-            addItemDecoration(customDecoration)
-            adapter = followerAdapter
-        }
+        binding.rvFollowerList.adapter = followerAdapter
     }
 
     private fun setOnItemClickListener() {

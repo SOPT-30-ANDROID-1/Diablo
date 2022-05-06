@@ -34,8 +34,12 @@
         <entry key="app/src/main/res/layout/fragment_follower_list.xml" value="0.4648370497427101" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.3333333333333333" />
         <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.172592919380629" />
+        <entry key="app/src/main/res/layout/fragment_profile_follower.xml" value="0.2796875" />
+        <entry key="app/src/main/res/layout/fragment_profile_repo.xml" value="0.16927083333333334" />
         <entry key="app/src/main/res/layout/fragment_repo_list.xml" value="0.2796875" />
-        <entry key="app/src/main/res/layout/item_follower_list.xml" value="1.5345497089656974" />
+        <entry key="app/src/main/res/layout/fragmnet_profile_follower.xml" value="0.2796875" />
+        <entry key="app/src/main/res/layout/fragmnet_profile_followeraaa.xml" value="0.2796875" />
+        <entry key="app/src/main/res/layout/item_follower_list.xml" value="0.37345581054687504" />
         <entry key="app/src/main/res/layout/item_repo_list.xml" value="0.2796875" />
         <entry key="app/src/main/res/menu/menu_list.xml" value="0.18958333333333333" />
       </map>

@@ -5,24 +5,20 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import org.sopt.diablo.R
-import org.sopt.diablo.adapter.FollowerAdapter
 import org.sopt.diablo.adapter.RepoAdapter
 import org.sopt.diablo.data.RepoData
-import org.sopt.diablo.data.UserData
-import org.sopt.diablo.databinding.FragmentFollowerListBinding
-import org.sopt.diablo.databinding.FragmentRepoListBinding
+import org.sopt.diablo.databinding.FragmentProfileRepoBinding
 
-class RepoListFragment : Fragment() {
+class ProfileRepoFragment : Fragment() {
     private lateinit var repoAdapter: RepoAdapter
-    private var _binding: FragmentRepoListBinding? = null
+    private var _binding: FragmentProfileRepoBinding? = null
     private val binding get() = _binding ?: error("Binding이 초기화 되지 않았습니다")
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentRepoListBinding.inflate(layoutInflater, container, false)
+        _binding = FragmentProfileRepoBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
 
