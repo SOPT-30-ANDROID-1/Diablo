@@ -35,10 +35,10 @@ class ProfileFragment: Fragment() {
         val followerFragment = ProfileFollowerFragment()
         val repoFragment = ProfileRepoFragment()
         childFragmentManager.beginTransaction().add(R.id.container_list, followerFragment).commit()
-        binding.btnFollower.isSelected = true
-        binding.btnRepo.isSelected = false
 
         with(binding) {
+            btnFollower.isSelected = true
+            btnRepo.isSelected = false
             btnFollower.setOnClickListener {
                 if (position == REPO_POSITION) {
                     fragmentManage(followerFragment, FOLLOWER_POSITION)
