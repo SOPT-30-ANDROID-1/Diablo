@@ -38,7 +38,7 @@ class FollowerAdapter: RecyclerView.Adapter<FollowerAdapter.FollowerViewHolder>(
         }
     }
 
-    interface ItemClickListener {
+    fun interface ItemClickListener {
         fun onClick(data: UserData)
     }
 
