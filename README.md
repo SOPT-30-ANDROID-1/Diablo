@@ -12,6 +12,7 @@
 | :---: | :----------------------------: | :------: | :-------------------------------------------: | :---: |
 | 1주차 |    안드로이드 기초와 View/ViewGroup     | 22/04/02 |[1st Seminar](#seminar1)|  ✅   |
 | 2주차 |    Fragment와 Recycler View     | 22/04/09 |[2nd Seminar](#seminar2)|✅   |
+| 3주차 |    ViewPager2와 앱 내 디자인 적용     | 22/04/23 |[3rd Seminar](#seminar3)|✅   |
 ---
 
 ## seminar1
@@ -155,10 +156,8 @@
 
 | Fragment 전환 | 디테일뷰 |
 | :---: | :---: |
-|
-<img width="100%" src="https://user-images.githubusercontent.com/71129059/164742749-0bc2eded-49d1-4a7b-99c1-4750597f74be.gif">|<img width="100%" src="https://user-images.githubusercontent.com/71129059/164742733-09595e12-fa47-42ed-9bb1-c68b824b3c41.gif">|
+|<img width="50%" src="https://user-images.githubusercontent.com/71129059/164742749-0bc2eded-49d1-4a7b-99c1-4750597f74be.gif">|<img width="50%" src="https://user-images.githubusercontent.com/71129059/164742733-09595e12-fa47-42ed-9bb1-c68b824b3c41.gif">|
 
-https://user-images.githubusercontent.com/71129059/164742749-0bc2eded-49d1-4a7b-99c1-4750597f74be.gif
 ### LEVEL1.
 
 - 자기소개 페이지를 만든 HomeActivity 하단에 FollowerRecyclerView, RepositoryRecyclerView 만들기
@@ -275,3 +274,75 @@ https://user-images.githubusercontent.com/71129059/164742749-0bc2eded-49d1-4a7b-
         }
     }
     ```
+
+
+---
+## seminar2
+### 구현화면
+
+| 회원가입 및 로그인 디자인 적용 | ViewPager2 및 TabLayout 적용 |
+| :---: | :---: |
+|<img width="50%" src="https://user-images.githubusercontent.com/71129059/167178771-fba90f5e-5360-4a14-bac6-55763d47c5f4.gif">|<img width="50%" src="https://user-images.githubusercontent.com/71129059/167179291-a581b7bc-1fd5-4a99-a326-a6f37b0b4927.gif">|
+
+### LEVEL1.
+- Selector를 통한 버튼 구현
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_selected="true" android:drawable="@drawable/shape_bg_sopt_button_selected"/>
+    <item android:state_selected="false" android:drawable="@drawable/shape_bg_sopt_button_notselected"/>
+</selector>
+```
+
+- ProfileFragment에서 버튼에 isSelected 설정
+```kotlin
+// ProfileFragment.kt
+private fun initTransactionEvent() {
+    val followerFragment = ProfileFollowerFragment()
+    val repoFragment = ProfileRepoFragment()
+    childFragmentManager.beginTransaction().add(R.id.container_list, followerFragment).commit()
+
+    with(binding) {
+        btnFollower.isSelected = true
+        btnRepo.isSelected = false
+        btnFollower.setOnClickListener {
+            if (position == REPO_POSITION) {
+                fragmentManage(followerFragment, FOLLOWER_POSITION)
+            }
+        }
+        btnRepo.setOnClickListener{
+            if (position == FOLLOWER_POSITION) {
+                fragmentManage(repoFragment, REPO_POSITION)
+            }
+        }
+    }
+}
+
+private fun fragmentManage(fragment: Fragment, pos: Int) {
+    childFragmentManager.beginTransaction().replace(R.id.container_list, fragment).commit()
+    with(binding) {
+        btnFollower.isSelected = !btnFollower.isSelected
+        btnRepo.isSelected = !btnRepo.isSelected
+    }
+    position = pos
+}
+```
+
+### LEVEL1.
+- ViewPager2의 중첩 스크롤 문제 해결 : `NestedScrollableHost` Util
+- Inner ViewPager2를 `NestedScrollabeHost`로 감싸준다
+
+```xml
+<org.sopt.diablo.util.NestedScrollableHost
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/tab_follow">
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/vp_follow"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</org.sopt.diablo.util.NestedScrollableHost>
+```
