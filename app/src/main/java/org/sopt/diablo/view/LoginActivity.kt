@@ -20,7 +20,7 @@ class LoginActivity : AppCompatActivity() {
         binding.btnLogin.setOnClickListener {
             if (isLoginFormsValid) {
                 Toast.makeText(this, "로그인 성공", Toast.LENGTH_SHORT).show()
-                Intent(this, HomeActivity::class.java).apply {
+                Intent(this, MainActivity::class.java).apply {
                     startActivity(this)
                 }
                 finish()
