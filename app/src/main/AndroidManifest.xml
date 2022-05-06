@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Diablo">
         <activity
+            android:name=".view.DetailActivity"
+            android:exported="false" />
+        <activity
             android:name=".view.HomeActivity"
             android:exported="false" />
         <activity
@@ -25,7 +28,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name=".view.MainActivity"
             android:exported="false" />
     </application>
 
