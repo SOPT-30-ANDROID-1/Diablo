@@ -71,6 +71,7 @@
         android:fontFamily="@font/notosanskr_regular"
         android:hint="@string/pw_hint"
         android:includeFontPadding="false"
+        android:inputType="textPassword"
         android:paddingVertical="12dp"
         android:paddingStart="16dp"
         android:textColor="@color/sopt_black"

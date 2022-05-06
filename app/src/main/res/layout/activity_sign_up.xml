@@ -10,17 +10,16 @@
         android:id="@+id/tv_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="80dp"
-        android:text="@string/signup"
         android:fontFamily="@font/notosanskr_bold"
         android:includeFontPadding="false"
+        android:text="@string/signup"
         android:textColor="@color/sopt_black"
         android:textSize="25sp"
         android:textStyle="bold"
-        android:layout_marginStart="20dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
 
     <TextView
         android:id="@+id/tv_name"
@@ -52,7 +51,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_name" />
-
 
     <TextView
         android:id="@+id/tv_id"
@@ -109,6 +107,7 @@
         android:fontFamily="@font/notosanskr_regular"
         android:hint="@string/pw_hint"
         android:includeFontPadding="false"
+        android:inputType="textPassword"
         android:paddingVertical="12dp"
         android:paddingStart="16dp"
         android:textColor="@color/sopt_black"
@@ -132,9 +131,8 @@
         android:text="@string/signup"
         android:textColor="@color/white"
         android:textSize="15sp"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

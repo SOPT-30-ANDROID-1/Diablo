@@ -20,7 +20,7 @@
         <entry key="app/src/main/res/layout/activity_home.xml" value="0.27145538330078134" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.13944396972656253" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.22870370370370371" />
-        <entry key="app/src/main/res/layout/activity_sign_up.xml" value="0.3182291666666667" />
+        <entry key="app/src/main/res/layout/activity_sign_up.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_follower_list.xml" value="0.4648370497427101" />
         <entry key="app/src/main/res/layout/fragment_repo_list.xml" value="0.2796875" />
         <entry key="app/src/main/res/layout/item_follower_list.xml" value="0.37207031249999994" />
