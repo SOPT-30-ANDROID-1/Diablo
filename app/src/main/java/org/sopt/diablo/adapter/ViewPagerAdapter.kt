@@ -11,20 +11,11 @@ import org.sopt.diablo.view.MainActivity
 import org.sopt.diablo.view.ProfileFragment
 
 class ViewPagerAdapter(fragment: FragmentActivity) : FragmentStateAdapter(fragment) {
-    lateinit var id: String
-    lateinit var name: String
-
     override fun getItemCount() = 3
 
     override fun createFragment(position: Int): Fragment {
-        var bundle = Bundle().apply {
-            putString("id", id)
-            putString("name", name)
-        }
         return when (position) {
-            MainActivity.PROFILE_POSITION -> ProfileFragment().apply {
-                arguments = bundle
-            }
+            MainActivity.PROFILE_POSITION -> ProfileFragment()
             MainActivity.HOME_POSITION -> HomeFragment()
             else -> CameraFragment()
         }

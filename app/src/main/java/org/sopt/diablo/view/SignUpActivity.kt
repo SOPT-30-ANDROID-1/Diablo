@@ -38,11 +38,11 @@ class SignUpActivity : AppCompatActivity() {
             password = binding.etPw.text.toString()
         )
 
-        with(ServiceCreator.soptService.postSignUp(requestSignUp)) {
+        ServiceCreator.soptService.postSignUp(requestSignUp).apply {
             enqueueUtil(
                 onSuccess = {
                     Toast.makeText(this@SignUpActivity, "회원가입 성공", Toast.LENGTH_SHORT).show()
-                    with(Intent()) {
+                    Intent().apply {
                         putExtra("id", binding.etId.text.toString())
                         putExtra("pw", binding.etPw.text.toString())
                         setResult(Activity.RESULT_OK, this)

@@ -1,23 +1,24 @@
 package org.sopt.diablo.view
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.bumptech.glide.Glide
 import org.sopt.diablo.R
+import org.sopt.diablo.adapter.FollowerAdapter
+import org.sopt.diablo.adapter.RepoAdapter
 import org.sopt.diablo.data.ServiceCreator
 import org.sopt.diablo.databinding.FragmentProfileBinding
+import org.sopt.diablo.util.MyApplication
 import org.sopt.diablo.util.enqueueUtil
 
 class ProfileFragment: Fragment() {
     private var position = HomeActivity.FOLLOWER_POSITION
     private var _binding: FragmentProfileBinding? = null
     private val binding get() = _binding ?: error("Binding이 초기화 되지 않았습니다")
-
-    lateinit var id: String
-    lateinit var name: String
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,8 +40,8 @@ class ProfileFragment: Fragment() {
     }
 
     private fun initView() {
-        id = arguments?.getString("id").toString()
-        name = arguments?.getString("name").toString()
+        val name = MyApplication.prefs.getString("name", "no name")
+        val id = MyApplication.prefs.getString("id", "no id")
         with(binding) {
             tvName.text = name
             tvId.text = id
@@ -56,16 +57,8 @@ class ProfileFragment: Fragment() {
     }
 
     private fun initTransactionEvent() {
-        var bundle = Bundle().apply {
-            putString("id", id)
-        }
-
-        val followerFragment = ProfileFollowerFragment().apply {
-            arguments = bundle
-        }
-        val repoFragment = ProfileRepoFragment().apply {
-            arguments = bundle
-        }
+        val followerFragment = ProfileFollowerFragment()
+        val repoFragment = ProfileRepoFragment()
         childFragmentManager.beginTransaction().add(R.id.container_list, followerFragment).commit()
 
         with(binding) {

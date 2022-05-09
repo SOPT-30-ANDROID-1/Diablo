@@ -1,6 +1,7 @@
 package org.sopt.diablo.view
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +11,7 @@ import org.sopt.diablo.adapter.RepoAdapter
 import org.sopt.diablo.data.RepoData
 import org.sopt.diablo.data.ServiceCreator
 import org.sopt.diablo.databinding.FragmentProfileRepoBinding
+import org.sopt.diablo.util.MyApplication
 import org.sopt.diablo.util.enqueueUtil
 
 class ProfileRepoFragment : Fragment() {
@@ -37,8 +39,8 @@ class ProfileRepoFragment : Fragment() {
 
     private fun initAdapter() {
         repoAdapter = RepoAdapter()
-        val id = arguments?.getString("id").toString()
-        with(ServiceCreator.githubService.getRepos(id)) {
+        val id = MyApplication.prefs.getString("id", "no id")
+        ServiceCreator.githubService.getRepos(id).apply {
             enqueueUtil(
                 onSuccess = {
                     repoAdapter.setItems(it)

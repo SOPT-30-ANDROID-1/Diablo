@@ -2,6 +2,7 @@ package org.sopt.diablo.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.viewpager2.widget.ViewPager2
 import org.sopt.diablo.R
 import org.sopt.diablo.adapter.FollowerAdapter
@@ -20,10 +21,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initAdapter() {
-        binding.vpMain.adapter = ViewPagerAdapter(this@MainActivity).apply {
-            id = intent?.getStringExtra("id").toString()
-            name = intent?.getStringExtra("name").toString()
-        }
+        binding.vpMain.adapter = ViewPagerAdapter(this@MainActivity)
         binding.vpMain.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
                 binding.bnvMain.menu.getItem(position).isChecked = true

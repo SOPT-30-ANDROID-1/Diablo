@@ -13,6 +13,7 @@ import org.sopt.diablo.data.request.RequestSignIn
 import org.sopt.diablo.data.response.BaseResponse
 import org.sopt.diablo.data.response.ResponseSignIn
 import org.sopt.diablo.databinding.ActivityLoginBinding
+import org.sopt.diablo.util.MyApplication
 import org.sopt.diablo.util.enqueueUtil
 import retrofit2.Call
 
@@ -21,7 +22,6 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater).also { setContentView(it.root) }
-
         initEvent()
     }
 
@@ -59,15 +59,18 @@ class LoginActivity : AppCompatActivity() {
             password = binding.etPw.text.toString()
         )
 
-        with(ServiceCreator.soptService.postSignIn(requestSignIn)) {
+        ServiceCreator.soptService.postSignIn(requestSignIn).apply {
             enqueueUtil(
                 onSuccess = {
                     it?.data.also {
                         Toast.makeText(this@LoginActivity, "${it?.name}님 반갑습니다!", Toast.LENGTH_SHORT)
                             .show()
-                        with(Intent(this@LoginActivity, MainActivity::class.java)) {
-                            putExtra("id", it?.id)
-                            putExtra("name", it?.name)
+                        with(MyApplication.prefs) {
+                            setString("id", it?.id.toString())
+                            setString("name", it?.name.toString())
+                        }
+
+                        Intent(this@LoginActivity, MainActivity::class.java).apply {
                             startActivity(this)
                         }
                     }

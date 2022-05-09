@@ -2,6 +2,7 @@ package org.sopt.diablo.view
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -14,6 +15,7 @@ import org.sopt.diablo.data.ServiceCreator
 import org.sopt.diablo.data.UserData
 import org.sopt.diablo.databinding.FragmentProfileFollowerBinding
 import org.sopt.diablo.databinding.FragmentProfileRepoBinding
+import org.sopt.diablo.util.MyApplication
 import org.sopt.diablo.util.enqueueUtil
 
 class ProfileFollowerFragment : Fragment() {
@@ -41,8 +43,9 @@ class ProfileFollowerFragment : Fragment() {
     }
 
     private fun initAdapter() {
-        val id = arguments?.getString("id").toString()
-        with(ServiceCreator.githubService.getFollowers(id)) {
+        followerAdapter = FollowerAdapter()
+        val id = MyApplication.prefs.getString("id", "no id")
+        ServiceCreator.githubService.getFollowers(id).apply {
             enqueueUtil(
                 onSuccess = {
                     followerAdapter.setItems(it)
