@@ -5,13 +5,19 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.bumptech.glide.Glide
 import org.sopt.diablo.R
+import org.sopt.diablo.data.ServiceCreator
 import org.sopt.diablo.databinding.FragmentProfileBinding
+import org.sopt.diablo.util.enqueueUtil
 
 class ProfileFragment: Fragment() {
     private var position = HomeActivity.FOLLOWER_POSITION
     private var _binding: FragmentProfileBinding? = null
     private val binding get() = _binding ?: error("Binding이 초기화 되지 않았습니다")
+
+    lateinit var id: String
+    lateinit var name: String
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -23,6 +29,7 @@ class ProfileFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initView()
         initTransactionEvent()
     }
 
@@ -31,9 +38,33 @@ class ProfileFragment: Fragment() {
         _binding = null
     }
 
+    private fun initView() {
+        id = arguments?.getString("id").toString()
+        name = arguments?.getString("name").toString()
+        with(binding) {
+            tvName.text = name
+            tvId.text = id
+        }
+        val call = ServiceCreator.githubService.getProfile(id)
+        call.enqueueUtil(
+            onSuccess = {
+                Glide.with(this).load(it.avatar_url).into(binding.ivProfile)
+                binding.tvIntroduction.text = it.bio
+            }
+        )
+    }
+
     private fun initTransactionEvent() {
-        val followerFragment = ProfileFollowerFragment()
-        val repoFragment = ProfileRepoFragment()
+        var bundle = Bundle().apply {
+            putString("id", id)
+        }
+
+        val followerFragment = ProfileFollowerFragment().apply {
+            arguments = bundle
+        }
+        val repoFragment = ProfileRepoFragment().apply {
+            arguments = bundle
+        }
         childFragmentManager.beginTransaction().add(R.id.container_list, followerFragment).commit()
 
         with(binding) {

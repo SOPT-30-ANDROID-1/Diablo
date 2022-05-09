@@ -3,11 +3,12 @@ package org.sopt.diablo.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import org.sopt.diablo.data.UserData
+import com.bumptech.glide.Glide
+import org.sopt.diablo.data.response.ResponseFollower
 import org.sopt.diablo.databinding.ItemProfileFollowerBinding
 
 class FollowerAdapter: RecyclerView.Adapter<FollowerAdapter.FollowerViewHolder>() {
-    val userList = mutableListOf<UserData>()
+    val userList = mutableListOf<ResponseFollower>()
     private lateinit var itemClickListener: ItemClickListener
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FollowerViewHolder {
@@ -22,15 +23,21 @@ class FollowerAdapter: RecyclerView.Adapter<FollowerAdapter.FollowerViewHolder>(
 
     override fun getItemCount(): Int = userList.size
 
+    fun setItems(newItems: List<ResponseFollower>) {
+        userList.clear()
+        userList.addAll(newItems)
+        notifyDataSetChanged()
+    }
+
     class FollowerViewHolder(
         private val binding: ItemProfileFollowerBinding,
         private val itemClickListener: ItemClickListener
     ) : RecyclerView.ViewHolder(binding.root) {
-        fun onBind(data: UserData) {
+        fun onBind(data: ResponseFollower) {
             binding.apply {
-                ivProfile.setImageResource(data.profile)
-                tvName.text = data.name
-                tvIntroduction.text = data.introduction
+                Glide.with(itemView).load(data.avatar_url).circleCrop().into(binding.ivProfile)
+                tvName.text = data.id
+                tvIntroduction.text = data.html_url
             }
             itemView.setOnClickListener {
                 itemClickListener.onClick(data)
@@ -39,7 +46,7 @@ class FollowerAdapter: RecyclerView.Adapter<FollowerAdapter.FollowerViewHolder>(
     }
 
     fun interface ItemClickListener {
-        fun onClick(data: UserData)
+        fun onClick(data: ResponseFollower)
     }
 
     fun setItemClickListener(itemClickListener: ItemClickListener) {

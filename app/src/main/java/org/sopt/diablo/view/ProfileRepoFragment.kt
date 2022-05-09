@@ -5,9 +5,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import org.sopt.diablo.adapter.FollowerAdapter
 import org.sopt.diablo.adapter.RepoAdapter
 import org.sopt.diablo.data.RepoData
+import org.sopt.diablo.data.ServiceCreator
 import org.sopt.diablo.databinding.FragmentProfileRepoBinding
+import org.sopt.diablo.util.enqueueUtil
 
 class ProfileRepoFragment : Fragment() {
     private lateinit var repoAdapter: RepoAdapter
@@ -33,25 +36,14 @@ class ProfileRepoFragment : Fragment() {
     }
 
     private fun initAdapter() {
-        repoAdapter = RepoAdapter().apply {
-            repoList.addAll(
-                listOf(
-                    RepoData("레포1", "과제레포입니다"),
-                    RepoData("레포2", "과제레포입니다"),
-                    RepoData("레포3", "과제레포입니다"),
-                    RepoData("레포4", "과제레포입니다"),
-                    RepoData("레포5", "과제레포입니다"),
-                    RepoData("레포6", "과제레포입니다"),
-                    RepoData("레포7", "과제레포입니다"),
-                    RepoData("레포8", "과제레포입니다"),
-                    RepoData("레포9", "과제레포입니다"),
-                    RepoData("레포10", "과제레포입니다"),
-                    RepoData("레포11", "과제레포입니다"),
-                )
-            )
-            notifyDataSetChanged()
-        }
+        repoAdapter = RepoAdapter()
+        val id = arguments?.getString("id").toString()
+        val call = ServiceCreator.githubService.getRepos(id)
+        call.enqueueUtil(
+            onSuccess = {
+                repoAdapter.setItems(it)
+            }
+        )
         binding.rvRepoList.adapter = repoAdapter
     }
-
 }

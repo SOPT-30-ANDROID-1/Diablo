@@ -7,11 +7,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import org.sopt.diablo.R
 import org.sopt.diablo.adapter.FollowerAdapter
+import org.sopt.diablo.data.ServiceCreator
 import org.sopt.diablo.data.UserData
 import org.sopt.diablo.databinding.FragmentProfileFollowerBinding
 import org.sopt.diablo.databinding.FragmentProfileRepoBinding
+import org.sopt.diablo.util.enqueueUtil
 
 class ProfileFollowerFragment : Fragment() {
     private lateinit var followerAdapter: FollowerAdapter
@@ -38,30 +41,23 @@ class ProfileFollowerFragment : Fragment() {
     }
 
     private fun initAdapter() {
-        followerAdapter = FollowerAdapter().apply {
-            userList.addAll(
-                listOf(
-                    UserData(R.drawable.ic_launcher_background, "정설희", "안드로이드 파트원"),
-                    UserData(R.drawable.ic_launcher_background, "정설희2", "안드로이드 파트원2"),
-                    UserData(R.drawable.ic_launcher_background, "정설희3", "안드로이드 파트원3"),
-                    UserData(R.drawable.ic_launcher_background, "정설희4", "안드로이드 파트원4"),
-                    UserData(R.drawable.ic_launcher_background, "정설희5", "안드로이드 파트원5"),
-                    UserData(R.drawable.ic_launcher_background, "정설희6", "안드로이드 파트원6"),
-                    UserData(R.drawable.ic_launcher_background, "정설희7", "안드로이드 파트원7"),
-                    UserData(R.drawable.ic_launcher_background, "정설희8", "안드로이드 파트원8"),
-                )
-            )
-            notifyDataSetChanged()
-        }
+        followerAdapter = FollowerAdapter()
+        val id = arguments?.getString("id").toString()
+        val call = ServiceCreator.githubService.getFollowers(id)
+        call.enqueueUtil(
+            onSuccess = {
+                followerAdapter.setItems(it)
+            }
+        )
         binding.rvFollowerList.adapter = followerAdapter
     }
 
     private fun setOnItemClickListener() {
         followerAdapter.setItemClickListener { data ->
             val intent = Intent(requireContext(), DetailActivity::class.java).apply {
-                putExtra("profile", data.profile)
-                putExtra("name", data.name)
-                putExtra("introduction", data.introduction)
+                putExtra("profile", data.avatar_url)
+                putExtra("name", data.id)
+                putExtra("introduction", data.html_url)
                 addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             }
             startActivity(intent)

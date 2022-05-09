@@ -4,7 +4,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.viewpager2.widget.ViewPager2
 import org.sopt.diablo.R
+import org.sopt.diablo.adapter.FollowerAdapter
 import org.sopt.diablo.adapter.ViewPagerAdapter
+import org.sopt.diablo.data.UserData
 import org.sopt.diablo.databinding.ActivityMainBinding
 
 
@@ -12,20 +14,19 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        binding = ActivityMainBinding.inflate(layoutInflater).also { setContentView(it.root) }
+
+
+
         initAdapter()
         initView()
     }
 
     private fun initAdapter() {
-        binding.vpMain.adapter = ViewPagerAdapter(this@MainActivity)
-        binding.vpMain.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
-            override fun onPageSelected(position: Int) {
-                binding.bnvMain.menu.getItem(position).isChecked = true
-            }
-        })
-
+        binding.vpMain.adapter = ViewPagerAdapter(this@MainActivity).apply {
+            id = intent?.getStringExtra("id").toString()
+            name = intent?.getStringExtra("name").toString()
+        }
         binding.vpMain.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
                 binding.bnvMain.menu.getItem(position).isChecked = true
