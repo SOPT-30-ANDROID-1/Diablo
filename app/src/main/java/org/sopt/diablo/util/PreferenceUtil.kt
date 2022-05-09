@@ -4,14 +4,18 @@ import android.content.Context
 import android.content.SharedPreferences
 
 class PreferenceUtil(context: Context) {
-    private val prefs: SharedPreferences =
-        context.getSharedPreferences("prefs_name", Context.MODE_PRIVATE)
+    private val ACCOUNT : String = "account"
 
-    fun getString(key: String, defValue: String): String {
-        return prefs.getString(key, defValue).toString()
-    }
+    private val accountPrefs: SharedPreferences =
+        context.getSharedPreferences(ACCOUNT, Context.MODE_PRIVATE)
 
-    fun setString(key: String, str: String) {
-        prefs.edit().putString(key, str).apply()
-    }
+    fun getId(): String = accountPrefs.getString("id", "").toString()
+    fun setId(str: String) = accountPrefs.edit().putString("id", str).apply()
+
+    fun getPw(): String = accountPrefs.getString("password", "").toString()
+    fun setPw(str: String) = accountPrefs.edit().putString("password", str).apply()
+
+    fun getName(): String = accountPrefs.getString("name", "").toString()
+    fun setName(str: String) = accountPrefs.edit().putString("name", str).apply()
+
 }

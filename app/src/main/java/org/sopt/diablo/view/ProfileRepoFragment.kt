@@ -36,7 +36,7 @@ class ProfileRepoFragment : Fragment() {
 
     private fun initAdapter() {
         repoAdapter = RepoAdapter()
-        val id = MyApplication.prefs.getString("id", "no id")
+        val id = MyApplication.prefs.getId()
         ServiceCreator.githubService.getRepos(id).apply {
             enqueueUtil(
                 onSuccess = {

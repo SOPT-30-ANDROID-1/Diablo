@@ -38,7 +38,7 @@ class ProfileFollowerFragment : Fragment() {
 
     private fun initAdapter() {
         followerAdapter = FollowerAdapter()
-        val id = MyApplication.prefs.getString("id", "no id")
+        val id = MyApplication.prefs.getId()
         ServiceCreator.githubService.getFollowers(id).apply {
             enqueueUtil(
                 onSuccess = {

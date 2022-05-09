@@ -38,8 +38,8 @@ class ProfileFragment: Fragment() {
     }
 
     private fun initView() {
-        val name = MyApplication.prefs.getString("name", "no name")
-        val id = MyApplication.prefs.getString("id", "no id")
+        val name = MyApplication.prefs.getName()
+        val id = MyApplication.prefs.getId()
         with(binding) {
             tvName.text = name
             tvId.text = id

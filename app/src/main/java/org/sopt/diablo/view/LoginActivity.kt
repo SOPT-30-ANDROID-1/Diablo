@@ -10,6 +10,7 @@ import org.sopt.diablo.data.ServiceCreator
 import org.sopt.diablo.data.request.RequestSignIn
 import org.sopt.diablo.databinding.ActivityLoginBinding
 import org.sopt.diablo.util.MyApplication
+import org.sopt.diablo.util.PreferenceUtil
 import org.sopt.diablo.util.enqueueUtil
 
 class LoginActivity : AppCompatActivity() {
@@ -21,16 +22,28 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun initEvent() {
-        binding.btnLogin.setOnClickListener {
-            if (isLoginFormsValid) loginNetwork()
-            else Toast.makeText(this, "아이디/비밀번호를 입력해주세요", Toast.LENGTH_SHORT).show()
+        if (isAutoLoginValid) {
+            Toast.makeText(this, "${MyApplication.prefs.getName()}님 자동 로그인 되었습니다", Toast.LENGTH_SHORT).show()
+            Intent(this, MainActivity::class.java).also {
+                startActivity(it)
+            }
+            finish()
         }
+        else {
+            binding.btnLogin.setOnClickListener {
+                if (isLoginFormsValid) loginNetwork()
+                else Toast.makeText(this, "아이디/비밀번호를 입력해주세요", Toast.LENGTH_SHORT).show()
+            }
 
-        binding.btnSignup.setOnClickListener {
-            val intent = Intent(this, SignUpActivity::class.java)
-            signUpActivityLauncher.launch(intent)
+            binding.btnSignup.setOnClickListener {
+                val intent = Intent(this, SignUpActivity::class.java)
+                signUpActivityLauncher.launch(intent)
+            }
         }
     }
+
+    private val isAutoLoginValid: Boolean
+        get() = !MyApplication.prefs.getId().isNullOrBlank() && !MyApplication.prefs.getName().isNullOrBlank()
 
     private val isLoginFormsValid: Boolean
         get() = binding.etId.text.isNotEmpty() && binding.etPw.text.isNotEmpty()
@@ -49,25 +62,26 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun loginNetwork() {
+        val id = binding.etId.text.toString()
+        val password = binding.etPw.text.toString()
         val requestSignIn = RequestSignIn(
-            id = binding.etId.text.toString(),
-            password = binding.etPw.text.toString()
+            id = id,
+            password = password
         )
 
         ServiceCreator.soptService.postSignIn(requestSignIn).apply {
             enqueueUtil(
                 onSuccess = {
-                    it?.data.also {
-                        Toast.makeText(this@LoginActivity, "${it?.name}님 반갑습니다!", Toast.LENGTH_SHORT)
-                            .show()
-                        with(MyApplication.prefs) {
-                            setString("id", it?.id.toString())
-                            setString("name", it?.name.toString())
-                        }
-
-                        Intent(this@LoginActivity, MainActivity::class.java).apply {
-                            startActivity(this)
-                        }
+                    val name = it?.data?.name.toString()
+                    Toast.makeText(this@LoginActivity, "${name}님 반갑습니다!", Toast.LENGTH_SHORT)
+                        .show()
+                    with(MyApplication.prefs) {
+                        setId(id)
+                        setName(name)
+                        setPw(password)
+                    }
+                    Intent(this@LoginActivity, MainActivity::class.java).also {
+                        startActivity(it)
                     }
                     finish()
                 },
