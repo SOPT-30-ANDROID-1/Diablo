@@ -4,18 +4,13 @@ import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
-import com.bumptech.glide.Glide
 import org.sopt.diablo.data.ServiceCreator
 import org.sopt.diablo.data.request.RequestSignIn
-import org.sopt.diablo.data.response.BaseResponse
-import org.sopt.diablo.data.response.ResponseSignIn
 import org.sopt.diablo.databinding.ActivityLoginBinding
 import org.sopt.diablo.util.MyApplication
 import org.sopt.diablo.util.enqueueUtil
-import retrofit2.Call
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding

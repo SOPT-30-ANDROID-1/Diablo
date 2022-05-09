@@ -2,26 +2,20 @@ package org.sopt.diablo.view
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import org.sopt.diablo.R
 import org.sopt.diablo.adapter.FollowerAdapter
 import org.sopt.diablo.data.ServiceCreator
-import org.sopt.diablo.data.UserData
 import org.sopt.diablo.databinding.FragmentProfileFollowerBinding
-import org.sopt.diablo.databinding.FragmentProfileRepoBinding
 import org.sopt.diablo.util.MyApplication
 import org.sopt.diablo.util.enqueueUtil
 
 class ProfileFollowerFragment : Fragment() {
-    private lateinit var followerAdapter: FollowerAdapter
     private var _binding: FragmentProfileFollowerBinding? = null
     private val binding get() = _binding ?: error("Binding이 초기화 되지 않았습니다")
+    private lateinit var followerAdapter: FollowerAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

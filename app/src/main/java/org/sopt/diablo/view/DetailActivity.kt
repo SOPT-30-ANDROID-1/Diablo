@@ -3,7 +3,6 @@ package org.sopt.diablo.view
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.bumptech.glide.Glide
-import org.sopt.diablo.R
 import org.sopt.diablo.databinding.ActivityDetailBinding
 
 class DetailActivity : AppCompatActivity() {

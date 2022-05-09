@@ -2,12 +2,9 @@ package org.sopt.diablo.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import androidx.viewpager2.widget.ViewPager2
 import org.sopt.diablo.R
-import org.sopt.diablo.adapter.FollowerAdapter
 import org.sopt.diablo.adapter.ViewPagerAdapter
-import org.sopt.diablo.data.UserData
 import org.sopt.diablo.databinding.ActivityMainBinding
 
 

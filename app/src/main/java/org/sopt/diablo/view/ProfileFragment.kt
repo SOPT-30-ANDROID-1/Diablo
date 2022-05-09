@@ -8,8 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import com.bumptech.glide.Glide
 import org.sopt.diablo.R
-import org.sopt.diablo.adapter.FollowerAdapter
-import org.sopt.diablo.adapter.RepoAdapter
 import org.sopt.diablo.data.ServiceCreator
 import org.sopt.diablo.databinding.FragmentProfileBinding
 import org.sopt.diablo.util.MyApplication

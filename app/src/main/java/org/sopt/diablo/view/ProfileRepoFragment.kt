@@ -1,14 +1,11 @@
 package org.sopt.diablo.view
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import org.sopt.diablo.adapter.FollowerAdapter
 import org.sopt.diablo.adapter.RepoAdapter
-import org.sopt.diablo.data.RepoData
 import org.sopt.diablo.data.ServiceCreator
 import org.sopt.diablo.databinding.FragmentProfileRepoBinding
 import org.sopt.diablo.util.MyApplication

@@ -35,8 +35,8 @@ class HomeFragment : Fragment() {
 
     private fun initAdapter() {
         val fragmentList = listOf(HomeFollowingFragment(), HomeFollowerFragment())
-
-        binding.vpFollow.adapter = FollowTabViewPagerAdapter(this).apply {
+        followTabViewPagerAdapter = FollowTabViewPagerAdapter(this)
+        binding.vpFollow.adapter = followTabViewPagerAdapter {
             fragments.addAll(fragmentList)
         }
     }
