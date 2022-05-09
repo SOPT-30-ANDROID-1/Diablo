@@ -38,22 +38,22 @@ class SignUpActivity : AppCompatActivity() {
             password = binding.etPw.text.toString()
         )
 
-        val call: Call<BaseResponse<ResponseSignUp>> =
-            ServiceCreator.soptService.postSignUp(requestSignUp)
-        call.enqueueUtil(
-            onSuccess = {
-                Toast.makeText(this@SignUpActivity, "회원가입 성공", Toast.LENGTH_SHORT).show()
-                with(Intent()) {
-                    putExtra("id", binding.etId.text.toString())
-                    putExtra("pw", binding.etPw.text.toString())
-                    setResult(Activity.RESULT_OK, this)
+        ServiceCreator.soptService.postSignUp(requestSignUp).apply {
+            enqueueUtil(
+                onSuccess = {
+                    Toast.makeText(this@SignUpActivity, "회원가입 성공", Toast.LENGTH_SHORT).show()
+                    with(Intent()) {
+                        putExtra("id", binding.etId.text.toString())
+                        putExtra("pw", binding.etPw.text.toString())
+                        setResult(Activity.RESULT_OK, this)
+                    }
+                    finish()
+                },
+                onError = {
+                    Toast.makeText(this@SignUpActivity, "회원가입에 실패하셨습니다.", Toast.LENGTH_SHORT)
+                        .show()
                 }
-                finish()
-            },
-            onError = {
-                Toast.makeText(this@SignUpActivity, "회원가입에 실패하셨습니다.", Toast.LENGTH_SHORT).show()
-            }
-        )
-
+            )
+        }
     }
 }

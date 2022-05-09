@@ -45,13 +45,14 @@ class ProfileFragment: Fragment() {
             tvName.text = name
             tvId.text = id
         }
-        val call = ServiceCreator.githubService.getProfile(id)
-        call.enqueueUtil(
-            onSuccess = {
-                Glide.with(this).load(it.avatar_url).into(binding.ivProfile)
-                binding.tvIntroduction.text = it.bio
-            }
-        )
+        val call = ServiceCreator.githubService.getProfile(id).apply {
+            enqueueUtil(
+                onSuccess = {
+                    Glide.with(this@ProfileFragment).load(it.avatar_url).into(binding.ivProfile)
+                    binding.tvIntroduction.text = it.bio
+                }
+            )
+        }
     }
 
     private fun initTransactionEvent() {

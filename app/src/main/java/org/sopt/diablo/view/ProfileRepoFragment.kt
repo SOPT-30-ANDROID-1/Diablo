@@ -38,12 +38,13 @@ class ProfileRepoFragment : Fragment() {
     private fun initAdapter() {
         repoAdapter = RepoAdapter()
         val id = arguments?.getString("id").toString()
-        val call = ServiceCreator.githubService.getRepos(id)
-        call.enqueueUtil(
-            onSuccess = {
-                repoAdapter.setItems(it)
-            }
-        )
+        ServiceCreator.githubService.getRepos(id).apply {
+            enqueueUtil(
+                onSuccess = {
+                    repoAdapter.setItems(it)
+                }
+            )
+        }
         binding.rvRepoList.adapter = repoAdapter
     }
 }

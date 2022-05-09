@@ -59,25 +59,24 @@ class LoginActivity : AppCompatActivity() {
             password = binding.etPw.text.toString()
         )
 
-        val call: Call<BaseResponse<ResponseSignIn>> =
-            ServiceCreator.soptService.postSignIn(requestSignIn)
+        ServiceCreator.soptService.postSignIn(requestSignIn).apply {
+            enqueueUtil(
+                onSuccess = {
+                    val data = it?.data
+                    Toast.makeText(this@LoginActivity, "${data?.name}님 반갑습니다!", Toast.LENGTH_SHORT)
+                        .show()
 
-        call.enqueueUtil(
-            onSuccess = {
-                val data = it?.data
-                Toast.makeText(this@LoginActivity, "${data?.name}님 반갑습니다!", Toast.LENGTH_SHORT)
-                    .show()
-
-                Intent(this@LoginActivity, MainActivity::class.java).apply {
-                    putExtra("id", data?.id)
-                    putExtra("name", data?.name)
-                    startActivity(this)
+                    Intent(this@LoginActivity, MainActivity::class.java).apply {
+                        putExtra("id", data?.id)
+                        putExtra("name", data?.name)
+                        startActivity(this)
+                    }
+                    finish()
+                },
+                onError = {
+                    Toast.makeText(this@LoginActivity, "로그인에 실패하셨습니다.", Toast.LENGTH_SHORT).show()
                 }
-                finish()
-            },
-            onError = {
-                Toast.makeText(this@LoginActivity, "로그인에 실패하셨습니다.", Toast.LENGTH_SHORT).show()
-            }
-        )
+            )
+        }
     }
 }
