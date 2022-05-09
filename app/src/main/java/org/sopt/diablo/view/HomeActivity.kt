@@ -20,7 +20,7 @@ class HomeActivity : AppCompatActivity() {
         val repoFragment = ProfileRepoFragment()
         supportFragmentManager.beginTransaction().add(R.id.container_list, followerFragment).commit()
 
-        binding.apply {
+        with(binding) {
             btnFollower.setOnClickListener {
                 if (position == REPO_POSITION) {
                     fragmentManage(followerFragment, FOLLOWER_POSITION)

@@ -15,7 +15,7 @@ class DetailActivity : AppCompatActivity() {
     }
 
     private fun initData() {
-        binding.apply{
+        with(binding) {
             Glide.with(this@DetailActivity).load(intent.getStringExtra("profile")).circleCrop().into(binding.ivProfile)
             tvNameContent.text = intent.getStringExtra("name")
             tvIntroductionContent.text = intent.getStringExtra("introduction")

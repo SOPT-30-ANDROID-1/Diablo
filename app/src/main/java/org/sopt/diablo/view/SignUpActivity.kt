@@ -38,7 +38,7 @@ class SignUpActivity : AppCompatActivity() {
             password = binding.etPw.text.toString()
         )
 
-        ServiceCreator.soptService.postSignUp(requestSignUp).apply {
+        with(ServiceCreator.soptService.postSignUp(requestSignUp)) {
             enqueueUtil(
                 onSuccess = {
                     Toast.makeText(this@SignUpActivity, "회원가입 성공", Toast.LENGTH_SHORT).show()

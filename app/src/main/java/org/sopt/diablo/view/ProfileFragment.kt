@@ -45,7 +45,7 @@ class ProfileFragment: Fragment() {
             tvName.text = name
             tvId.text = id
         }
-        val call = ServiceCreator.githubService.getProfile(id).apply {
+        with(ServiceCreator.githubService.getProfile(id)) {
             enqueueUtil(
                 onSuccess = {
                     Glide.with(this@ProfileFragment).load(it.avatar_url).into(binding.ivProfile)

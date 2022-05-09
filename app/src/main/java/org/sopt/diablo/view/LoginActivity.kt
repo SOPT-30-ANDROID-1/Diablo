@@ -59,17 +59,17 @@ class LoginActivity : AppCompatActivity() {
             password = binding.etPw.text.toString()
         )
 
-        ServiceCreator.soptService.postSignIn(requestSignIn).apply {
+        with(ServiceCreator.soptService.postSignIn(requestSignIn)) {
             enqueueUtil(
                 onSuccess = {
-                    val data = it?.data
-                    Toast.makeText(this@LoginActivity, "${data?.name}님 반갑습니다!", Toast.LENGTH_SHORT)
-                        .show()
-
-                    Intent(this@LoginActivity, MainActivity::class.java).apply {
-                        putExtra("id", data?.id)
-                        putExtra("name", data?.name)
-                        startActivity(this)
+                    it?.data.also {
+                        Toast.makeText(this@LoginActivity, "${it?.name}님 반갑습니다!", Toast.LENGTH_SHORT)
+                            .show()
+                        with(Intent(this@LoginActivity, MainActivity::class.java)) {
+                            putExtra("id", it?.id)
+                            putExtra("name", it?.name)
+                            startActivity(this)
+                        }
                     }
                     finish()
                 },
