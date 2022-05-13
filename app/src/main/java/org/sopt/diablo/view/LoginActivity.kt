@@ -12,6 +12,7 @@ import org.sopt.diablo.databinding.ActivityLoginBinding
 import org.sopt.diablo.util.MyApplication
 import org.sopt.diablo.util.PreferenceUtil
 import org.sopt.diablo.util.enqueueUtil
+import org.sopt.diablo.util.showToast
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
@@ -23,7 +24,7 @@ class LoginActivity : AppCompatActivity() {
 
     private fun initEvent() {
         if (isAutoLoginValid) {
-            Toast.makeText(this, "${MyApplication.prefs.getName()}님 자동 로그인 되었습니다", Toast.LENGTH_SHORT).show()
+            showToast("${MyApplication.prefs.getName()}님 자동 로그인 되었습니다")
             Intent(this, MainActivity::class.java).also {
                 startActivity(it)
             }
@@ -32,7 +33,7 @@ class LoginActivity : AppCompatActivity() {
         else {
             binding.btnLogin.setOnClickListener {
                 if (isLoginFormsValid) loginNetwork()
-                else Toast.makeText(this, "아이디/비밀번호를 입력해주세요", Toast.LENGTH_SHORT).show()
+                else showToast("아이디/비밀번호를 입력해주세요")
             }
 
             binding.btnSignup.setOnClickListener {
@@ -73,8 +74,7 @@ class LoginActivity : AppCompatActivity() {
             enqueueUtil(
                 onSuccess = {
                     val name = it?.data?.name.toString()
-                    Toast.makeText(this@LoginActivity, "${name}님 반갑습니다!", Toast.LENGTH_SHORT)
-                        .show()
+                    showToast("${name}님 반갑습니다!")
                     with(MyApplication.prefs) {
                         setId(id)
                         setName(name)
@@ -86,7 +86,7 @@ class LoginActivity : AppCompatActivity() {
                     finish()
                 },
                 onError = {
-                    Toast.makeText(this@LoginActivity, "로그인에 실패하셨습니다.", Toast.LENGTH_SHORT).show()
+                    showToast("로그인에 실패하셨습니다.")
                 }
             )
         }

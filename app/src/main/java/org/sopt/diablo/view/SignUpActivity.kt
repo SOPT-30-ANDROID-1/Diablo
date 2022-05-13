@@ -11,6 +11,7 @@ import org.sopt.diablo.data.response.BaseResponse
 import org.sopt.diablo.data.response.ResponseSignUp
 import org.sopt.diablo.databinding.ActivitySignUpBinding
 import org.sopt.diablo.util.enqueueUtil
+import org.sopt.diablo.util.showToast
 import retrofit2.Call
 
 class SignUpActivity : AppCompatActivity() {
@@ -24,7 +25,7 @@ class SignUpActivity : AppCompatActivity() {
     private fun initEvent() {
         binding.btnSignup.setOnClickListener {
             if (isSignUpFormValid) signUpNetwork()
-            else Toast.makeText(this, "입력되지 않은 정보가 있습니다", Toast.LENGTH_SHORT).show()
+            else showToast("입력되지 않은 정보가 있습니다")
         }
     }
 
@@ -41,7 +42,7 @@ class SignUpActivity : AppCompatActivity() {
         ServiceCreator.soptService.postSignUp(requestSignUp).apply {
             enqueueUtil(
                 onSuccess = {
-                    Toast.makeText(this@SignUpActivity, "회원가입 성공", Toast.LENGTH_SHORT).show()
+                    showToast("회원가입 성공")
                     Intent().apply {
                         putExtra("id", binding.etId.text.toString())
                         putExtra("pw", binding.etPw.text.toString())
@@ -50,8 +51,7 @@ class SignUpActivity : AppCompatActivity() {
                     finish()
                 },
                 onError = {
-                    Toast.makeText(this@SignUpActivity, "회원가입에 실패하셨습니다.", Toast.LENGTH_SHORT)
-                        .show()
+                    showToast("회원가입에 실패하셨습니다.")
                 }
             )
         }
