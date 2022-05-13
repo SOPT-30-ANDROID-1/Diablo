@@ -18,4 +18,9 @@ class CameraFragment: Fragment() {
         _binding = FragmentCameraBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }
