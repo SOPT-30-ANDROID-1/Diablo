@@ -51,13 +51,13 @@ class ProfileFollowerFragment : Fragment() {
 
     private fun setOnItemClickListener() {
         followerAdapter.setItemClickListener { data ->
-            val intent = Intent(requireContext(), DetailActivity::class.java).apply {
+            Intent(requireContext(), DetailActivity::class.java).apply {
                 putExtra("profile", data.avatar_url)
                 putExtra("name", data.id)
                 putExtra("introduction", data.html_url)
                 addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                startActivity(this)
             }
-            startActivity(intent)
         }
     }
 }

@@ -9,16 +9,9 @@ object ServiceCreator {
     private const val BASE_URL_GITHUB = "https://api.github.com/"
     private const val BASE_URL_SOPT = "http://13.124.62.236/"
 
-    private val githubRetrofit: Retrofit = Retrofit.Builder()
-        .baseUrl(BASE_URL_GITHUB)
-        .addConverterFactory(GsonConverterFactory.create())
-        .build()
+    private fun buildRetrofit(url: String): Retrofit =
+        Retrofit.Builder().baseUrl(url).addConverterFactory(GsonConverterFactory.create()).build()
 
-    private val soptRetrofit: Retrofit = Retrofit.Builder()
-        .baseUrl(BASE_URL_SOPT)
-        .addConverterFactory(GsonConverterFactory.create())
-        .build()
-
-    val githubService: GithubService = githubRetrofit.create(GithubService::class.java)
-    val soptService: SoptService = soptRetrofit.create(SoptService::class.java)
+    val githubService: GithubService = buildRetrofit(BASE_URL_GITHUB).create(GithubService::class.java)
+    val soptService: SoptService = buildRetrofit(BASE_URL_SOPT).create(SoptService::class.java)
 }
