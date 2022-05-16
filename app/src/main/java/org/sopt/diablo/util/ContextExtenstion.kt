@@ -2,6 +2,7 @@ package org.sopt.diablo.util
 
 import android.content.Context
 import android.util.Log
+import android.util.TypedValue
 import android.widget.Toast
 import retrofit2.Call
 import retrofit2.Callback
@@ -30,4 +31,8 @@ fun <ResponseType> Call<ResponseType>.enqueueUtil(
         }
 
     })
+}
+
+fun dpToPx(context: Context, dp: Float): Float {
+    return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, context.resources.displayMetrics)
 }
