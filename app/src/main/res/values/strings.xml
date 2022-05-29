@@ -15,4 +15,10 @@
     <string name="github">Github</string>
     <string name="following">팔로잉</string>
     <string name="follower">팔로워</string>
+    <string name="onboarding">온보딩</string>
+    <string name="next">다음으로</string>
+    <string name="start">시작하기</string>
+    <string name="welcome_message1">GitHub에 오신걸\n환영합니다!</string>
+    <string name="welcome_message2">GitHub에서 즐거운 시간\n보내시길 바랍니다!</string>
+    <string name="welcome_message3">GitHub를\n시작해봅시다!</string>
 </resources>
