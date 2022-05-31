@@ -1,14 +1,12 @@
 package org.sopt.diablo.adapter
 
-import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import org.sopt.diablo.data.UserData
-import org.sopt.diablo.view.CameraFragment
-import org.sopt.diablo.view.HomeFragment
-import org.sopt.diablo.view.MainActivity
-import org.sopt.diablo.view.ProfileFragment
+import org.sopt.diablo.view.main.camera.CameraFragment
+import org.sopt.diablo.view.main.home.HomeFragment
+import org.sopt.diablo.view.main.MainActivity
+import org.sopt.diablo.view.main.profile.ProfileFragment
 
 class ViewPagerAdapter(fragment: FragmentActivity) : FragmentStateAdapter(fragment) {
     override fun getItemCount() = 3

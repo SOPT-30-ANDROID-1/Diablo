@@ -1,4 +1,4 @@
-package org.sopt.diablo.view
+package org.sopt.diablo.view.main
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

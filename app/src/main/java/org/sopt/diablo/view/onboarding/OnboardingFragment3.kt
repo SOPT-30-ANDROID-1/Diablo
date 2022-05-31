@@ -1,15 +1,11 @@
-package org.sopt.diablo
+package org.sopt.diablo.view.onboarding
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.fragment.findNavController
-import org.sopt.diablo.databinding.FragmentOnboarding2Binding
 import org.sopt.diablo.databinding.FragmentOnboarding3Binding
-import org.sopt.diablo.view.DetailActivity
 
 class OnboardingFragment3 : Fragment() {
     private var _binding: FragmentOnboarding3Binding? = null

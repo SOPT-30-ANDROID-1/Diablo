@@ -5,6 +5,8 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import org.sopt.diablo.R
 import org.sopt.diablo.databinding.ActivityHomeBinding
+import org.sopt.diablo.view.main.profile.ProfileFollowerFragment
+import org.sopt.diablo.view.main.profile.ProfileRepoFragment
 
 class HomeActivity : AppCompatActivity() {
     private var position = FOLLOWER_POSITION

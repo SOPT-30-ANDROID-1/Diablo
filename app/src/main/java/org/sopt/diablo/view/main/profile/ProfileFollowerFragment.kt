@@ -1,4 +1,4 @@
-package org.sopt.diablo.view
+package org.sopt.diablo.view.main.profile
 
 import android.content.Intent
 import android.os.Bundle

@@ -1,18 +1,17 @@
-package org.sopt.diablo.view
+package org.sopt.diablo.view.auth
 
 import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import org.sopt.diablo.data.ServiceCreator
 import org.sopt.diablo.data.request.RequestSignIn
 import org.sopt.diablo.databinding.ActivityLoginBinding
 import org.sopt.diablo.util.MyApplication
-import org.sopt.diablo.util.PreferenceUtil
 import org.sopt.diablo.util.enqueueUtil
 import org.sopt.diablo.util.showToast
+import org.sopt.diablo.view.main.MainActivity
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding

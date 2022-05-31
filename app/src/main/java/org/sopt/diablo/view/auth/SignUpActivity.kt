@@ -1,18 +1,14 @@
-package org.sopt.diablo.view
+package org.sopt.diablo.view.auth
 
 import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
 import org.sopt.diablo.data.ServiceCreator
 import org.sopt.diablo.data.request.RequestSignUp
-import org.sopt.diablo.data.response.BaseResponse
-import org.sopt.diablo.data.response.ResponseSignUp
 import org.sopt.diablo.databinding.ActivitySignUpBinding
 import org.sopt.diablo.util.enqueueUtil
 import org.sopt.diablo.util.showToast
-import retrofit2.Call
 
 class SignUpActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySignUpBinding

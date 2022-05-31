@@ -1,4 +1,4 @@
-package org.sopt.diablo.view
+package org.sopt.diablo.view.main.profile
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -11,6 +11,7 @@ import org.sopt.diablo.data.ServiceCreator
 import org.sopt.diablo.databinding.FragmentProfileBinding
 import org.sopt.diablo.util.MyApplication
 import org.sopt.diablo.util.enqueueUtil
+import org.sopt.diablo.view.HomeActivity
 
 class ProfileFragment: Fragment() {
     private var position = HomeActivity.FOLLOWER_POSITION
