@@ -1,4 +1,4 @@
-package org.sopt.diablo.view
+package org.sopt.diablo.util
 
 import android.graphics.Rect
 import android.view.View
