@@ -35,7 +35,7 @@ class FollowerAdapter: RecyclerView.Adapter<FollowerAdapter.FollowerViewHolder>(
     ) : RecyclerView.ViewHolder(binding.root) {
         fun onBind(data: ResponseFollower) {
             binding.apply {
-                Glide.with(itemView).load(data.avatar_url).circleCrop().into(binding.ivProfile)
+                Glide.with(itemView).load(data.avatar_url).into(binding.ivProfile)
                 tvName.text = data.id
                 tvIntroduction.text = data.html_url
             }

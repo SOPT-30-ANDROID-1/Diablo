@@ -29,7 +29,7 @@ class OnboardingFragment3 : Fragment() {
 
     private fun setOnItemClickListener() {
         binding.btnStart.setOnClickListener {
-            MyApplication.prefs.setOnboardingActivated()
+            MyApplication.prefs.setOnboardingDisabled()
             activity?.finish()
         }
     }

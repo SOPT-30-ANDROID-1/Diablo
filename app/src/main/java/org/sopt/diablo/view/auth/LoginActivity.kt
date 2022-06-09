@@ -4,7 +4,9 @@ import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.result.contract.ActivityResultContracts
+import kotlinx.android.synthetic.main.activity_login.*
 import org.sopt.diablo.data.ServiceCreator
 import org.sopt.diablo.data.request.RequestSignIn
 import org.sopt.diablo.databinding.ActivityLoginBinding
@@ -32,6 +34,10 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun initEvent() {
+        binding.ivAutologinCheck.setOnClickListener {
+            it.isSelected = !it.isSelected
+        }
+
         if (isAutoLoginValid) {
             showToast("${MyApplication.prefs.getName()}님 자동 로그인 되었습니다")
             Intent(this, MainActivity::class.java).also {
@@ -53,7 +59,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private val isAutoLoginValid: Boolean
-        get() = !MyApplication.prefs.getId().isNullOrBlank() && !MyApplication.prefs.getName().isNullOrBlank()
+        get() = MyApplication.prefs.getAutoLogin()
 
     private val isLoginFormsValid: Boolean
         get() = binding.etId.text.isNotEmpty() && binding.etPw.text.isNotEmpty()
@@ -87,10 +93,12 @@ class LoginActivity : AppCompatActivity() {
                 onSuccess = {
                     val name = it?.data?.name.toString()
                     showToast("${name}님 반갑습니다!")
+                    if(binding.ivAutologinCheck.isSelected) {
+                        MyApplication.prefs.setAutoLogin()
+                    }
                     with(MyApplication.prefs) {
                         setId(id)
                         setName(name)
-                        setPw(password)
                     }
                     Intent(this@LoginActivity, MainActivity::class.java).also {
                         startActivity(it)
