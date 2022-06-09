@@ -14,7 +14,7 @@
         android:theme="@style/Theme.Diablo"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".view.onboarding.OnboardingActivity"
+            android:name=".view.auth.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,6 +23,7 @@
             </intent-filter>
 
         </activity>
+
         <activity
             android:name=".view.main.profile.DetailActivity"
             android:exported="false" />
@@ -33,7 +34,7 @@
             android:name=".view.auth.SignUpActivity"
             android:exported="false" />
         <activity
-            android:name=".view.auth.LoginActivity"
+            android:name=".view.onboarding.OnboardingActivity"
             android:exported="false">
         </activity>
         <activity

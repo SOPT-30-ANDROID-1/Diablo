@@ -9,10 +9,14 @@
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1" />
         <entry key="app/src/main/res/drawable-v24/ic_profile.xml" value="0.158" />
         <entry key="app/src/main/res/drawable-v24/ic_setting.xml" value="0.158" />
+        <entry key="app/src/main/res/drawable/ic_check_selected.xml" value="0.1255" />
+        <entry key="app/src/main/res/drawable/ic_check_unselected.xml" value="0.1255" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/image_border.xml" value="0.158" />
         <entry key="app/src/main/res/drawable/selector_bg_sopt_button.xml" value="0.158" />
         <entry key="app/src/main/res/drawable/selector_bg_sopt_edit.xml" value="0.143" />
+        <entry key="app/src/main/res/drawable/selector_check_button.xml" value="0.1255" />
+        <entry key="app/src/main/res/drawable/selector_ic_check.xml" value="0.1255" />
         <entry key="app/src/main/res/drawable/shape_bg_feed_card.xml" value="0.1735" />
         <entry key="app/src/main/res/drawable/shape_bg_gradient_gray_button.xml" value="0.164" />
         <entry key="app/src/main/res/drawable/shape_bg_gradient_mint_button.xml" value="0.1575" />
@@ -28,7 +32,7 @@
         <entry key="app/src/main/res/font/noto_sans_kr.xml" value="0.2203125" />
         <entry key="app/src/main/res/layout/activity_detail.xml" value="0.21236623128255205" />
         <entry key="app/src/main/res/layout/activity_home.xml" value="0.27145538330078134" />
-        <entry key="app/src/main/res/layout/activity_login.xml" value="0.13944396972656253" />
+        <entry key="app/src/main/res/layout/activity_login.xml" value="0.21401824951171877" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.10243377685546873" />
         <entry key="app/src/main/res/layout/activity_onboarding.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_sign_up.xml" value="0.130078125" />

@@ -12,6 +12,7 @@ import org.sopt.diablo.util.MyApplication
 import org.sopt.diablo.util.enqueueUtil
 import org.sopt.diablo.util.showToast
 import org.sopt.diablo.view.main.MainActivity
+import org.sopt.diablo.view.onboarding.OnboardingActivity
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
@@ -19,6 +20,15 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater).also { setContentView(it.root) }
         initEvent()
+        initOnboarding()
+    }
+
+    private fun initOnboarding() {
+        if (isOnboardingActivated) {
+            Intent(this, OnboardingActivity::class.java).also {
+                startActivity(it)
+            }
+        }
     }
 
     private fun initEvent() {
@@ -47,6 +57,9 @@ class LoginActivity : AppCompatActivity() {
 
     private val isLoginFormsValid: Boolean
         get() = binding.etId.text.isNotEmpty() && binding.etPw.text.isNotEmpty()
+
+    private val isOnboardingActivated: Boolean
+        get() = MyApplication.prefs.getOnboardingActivation()
 
     private val signUpActivityLauncher = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()

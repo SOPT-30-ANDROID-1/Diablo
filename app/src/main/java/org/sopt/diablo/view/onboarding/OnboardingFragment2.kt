@@ -18,10 +18,18 @@ class OnboardingFragment2 : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentOnboarding2Binding.inflate(layoutInflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setOnItemClickListener()
+    }
+
+    private fun setOnItemClickListener() {
         binding.btnNext.setOnClickListener {
             findNavController().navigate(R.id.action_onboardingFragment2_to_onboardingFragment3)
         }
-        return binding.root
     }
 
     override fun onDestroyView() {

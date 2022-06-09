@@ -4,10 +4,13 @@ import android.content.Context
 import android.content.SharedPreferences
 
 class PreferenceUtil(context: Context) {
-    private val ACCOUNT : String = "account"
+    private val ACCOUNT: String = "account"
 
     private val accountPrefs: SharedPreferences =
         context.getSharedPreferences(ACCOUNT, Context.MODE_PRIVATE)
+
+    fun getOnboardingActivation(): Boolean = accountPrefs.getBoolean("onboarding", true)
+    fun setOnboardingActivated() = accountPrefs.edit().putBoolean("onboarding", false).apply()
 
     fun getId(): String = accountPrefs.getString("id", "").toString()
     fun setId(str: String) = accountPrefs.edit().putString("id", str).apply()
