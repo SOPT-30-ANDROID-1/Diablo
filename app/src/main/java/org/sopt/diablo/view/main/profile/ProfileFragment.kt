@@ -1,5 +1,6 @@
 package org.sopt.diablo.view.main.profile
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -12,6 +13,7 @@ import org.sopt.diablo.databinding.FragmentProfileBinding
 import org.sopt.diablo.util.MyApplication
 import org.sopt.diablo.util.enqueueUtil
 import org.sopt.diablo.view.HomeActivity
+import org.sopt.diablo.view.onboarding.OnboardingActivity
 
 class ProfileFragment: Fragment() {
     private var position = HomeActivity.FOLLOWER_POSITION
@@ -30,6 +32,7 @@ class ProfileFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
         initView()
         initTransactionEvent()
+        setOnSettingClickListener()
     }
 
     override fun onDestroyView() {
@@ -87,5 +90,13 @@ class ProfileFragment: Fragment() {
     companion object {
         const val FOLLOWER_POSITION = 1
         const val REPO_POSITION = 2
+    }
+
+    private fun setOnSettingClickListener() {
+        binding.ivSetting.setOnClickListener {
+            Intent(requireContext(), SettingActivity::class.java).also {
+                startActivity(it)
+            }
+        }
     }
 }
