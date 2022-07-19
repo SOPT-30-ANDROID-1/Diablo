@@ -12,6 +12,8 @@
 | :---: | :----------------------------: | :------: | :-------------------------------------------: | :---: |
 | 1주차 |    안드로이드 기초와 View/ViewGroup     | 22/04/02 |[1st Seminar](#seminar1)|  ✅   |
 | 2주차 |    Fragment와 Recycler View     | 22/04/09 |[2nd Seminar](#seminar2)|✅   |
+| 3주차 |    ViewPager2와 앱 내 디자인 적용     | 22/04/23 |[3rd Seminar](#seminar3)|✅   |
+| 4주차 |    Retrofit2로 서버와 통신하기     | 22/04/23 |[4th Seminar](#seminar4)|✅   |
 ---
 
 ## seminar1
@@ -155,10 +157,8 @@
 
 | Fragment 전환 | 디테일뷰 |
 | :---: | :---: |
-|
-<img width="100%" src="https://user-images.githubusercontent.com/71129059/164742749-0bc2eded-49d1-4a7b-99c1-4750597f74be.gif">|<img width="100%" src="https://user-images.githubusercontent.com/71129059/164742733-09595e12-fa47-42ed-9bb1-c68b824b3c41.gif">|
+|<img width="50%" src="https://user-images.githubusercontent.com/71129059/164742749-0bc2eded-49d1-4a7b-99c1-4750597f74be.gif">|<img width="50%" src="https://user-images.githubusercontent.com/71129059/164742733-09595e12-fa47-42ed-9bb1-c68b824b3c41.gif">|
 
-https://user-images.githubusercontent.com/71129059/164742749-0bc2eded-49d1-4a7b-99c1-4750597f74be.gif
 ### LEVEL1.
 
 - 자기소개 페이지를 만든 HomeActivity 하단에 FollowerRecyclerView, RepositoryRecyclerView 만들기
@@ -275,3 +275,235 @@ https://user-images.githubusercontent.com/71129059/164742749-0bc2eded-49d1-4a7b-
         }
     }
     ```
+
+
+---
+## seminar3
+### 구현화면
+
+| 회원가입 및 로그인 디자인 적용 | ViewPager2 및 TabLayout 적용 |
+| :---: | :---: |
+|<img width="50%" src="https://user-images.githubusercontent.com/71129059/167178771-fba90f5e-5360-4a14-bac6-55763d47c5f4.gif">|<img width="50%" src="https://user-images.githubusercontent.com/71129059/167179291-a581b7bc-1fd5-4a99-a326-a6f37b0b4927.gif">|
+
+### LEVEL1.
+- Selector를 통한 버튼 구현
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_selected="true" android:drawable="@drawable/shape_bg_sopt_button_selected"/>
+    <item android:state_selected="false" android:drawable="@drawable/shape_bg_sopt_button_notselected"/>
+</selector>
+```
+
+- ProfileFragment에서 버튼에 isSelected 설정
+```kotlin
+// ProfileFragment.kt
+private fun initTransactionEvent() {
+    val followerFragment = ProfileFollowerFragment()
+    val repoFragment = ProfileRepoFragment()
+    childFragmentManager.beginTransaction().add(R.id.container_list, followerFragment).commit()
+
+    with(binding) {
+        btnFollower.isSelected = true
+        btnRepo.isSelected = false
+        btnFollower.setOnClickListener {
+            if (position == REPO_POSITION) {
+                fragmentManage(followerFragment, FOLLOWER_POSITION)
+            }
+        }
+        btnRepo.setOnClickListener{
+            if (position == FOLLOWER_POSITION) {
+                fragmentManage(repoFragment, REPO_POSITION)
+            }
+        }
+    }
+}
+
+private fun fragmentManage(fragment: Fragment, pos: Int) {
+    childFragmentManager.beginTransaction().replace(R.id.container_list, fragment).commit()
+    with(binding) {
+        btnFollower.isSelected = !btnFollower.isSelected
+        btnRepo.isSelected = !btnRepo.isSelected
+    }
+    position = pos
+}
+```
+
+### LEVEL2.
+- ViewPager2의 중첩 스크롤 문제 해결 : `NestedScrollableHost` Util
+- Inner ViewPager2를 `NestedScrollabeHost`로 감싸준다
+
+```xml
+<org.sopt.diablo.util.NestedScrollableHost
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/tab_follow">
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/vp_follow"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</org.sopt.diablo.util.NestedScrollableHost>
+```
+
+---
+## seminar4
+### 구현화면
+
+| 회원가입 서버통신 | 로그인 및 깃허브 서버통신 |
+| :---: | :---: |
+|<img width="50%" src="https://user-images.githubusercontent.com/71129059/168304813-3a951147-ae35-47ef-887a-005de7a45c56.gif">|<img width="50%" src="https://user-images.githubusercontent.com/71129059/168304819-e8407870-933f-4bf2-b783-9710b80440d8.gif">|
+
+### LEVEL1.
+- 로그인/회원가입 API 연동
+- 확장함수 사용
+```kotlin
+// ContextExtension.kt
+fun <ResponseType> Call<ResponseType>.enqueueUtil(
+    onSuccess: (ResponseType) -> Unit,
+    onError: ((stateCode: Int) -> Unit)? = null
+) {
+    this.enqueue(object : Callback<ResponseType> {
+        override fun onResponse(call: Call<ResponseType>, response: Response<ResponseType>) {
+            if (response.isSuccessful) {
+                onSuccess.invoke(response.body() ?: return)
+            } else {
+                onError?.invoke(response.code())
+            }
+        }
+
+        override fun onFailure(call: Call<ResponseType>, t: Throwable) {
+            Log.d("NetworkTest", "error:$t")
+        }
+
+    })
+}
+```
+
+```kotlin
+// SignUpActivity.kt
+private fun signUpNetwork() {
+    val requestSignUp = RequestSignUp(
+        name = binding.etName.text.toString(),
+        id = binding.etId.text.toString(),
+        password = binding.etPw.text.toString()
+    )
+
+    ServiceCreator.soptService.postSignUp(requestSignUp).apply {
+        enqueueUtil(
+            onSuccess = {
+                showToast("회원가입 성공")
+                Toast.makeText(this@SignUpActivity, "회원가입 성공", Toast.LENGTH_SHORT).show()
+                Intent().apply {
+                    putExtra("id", binding.etId.text.toString())
+                    putExtra("pw", binding.etPw.text.toString())
+                    setResult(Activity.RESULT_OK, this)
+                }
+                finish()
+            },
+            onError = {
+                showToast("회원가입에 실패하셨습니다.")
+            }
+        )
+    }
+}
+```
+
+### LEVEL2.
+- Github API 연동
+- SharedPreference 사용 (로그인된 깃허브 아이디로 서버통신을 하기 위해서)
+```kotlin
+// PreferenceUtil
+
+class PreferenceUtil(context: Context) {
+    private val ACCOUNT : String = "account"
+
+    private val accountPrefs: SharedPreferences =
+        context.getSharedPreferences(ACCOUNT, Context.MODE_PRIVATE)
+
+    fun getId(): String = accountPrefs.getString("id", "").toString()
+    fun setId(str: String) = accountPrefs.edit().putString("id", str).apply()
+
+    fun getPw(): String = accountPrefs.getString("password", "").toString()
+    fun setPw(str: String) = accountPrefs.edit().putString("password", str).apply()
+
+    fun getName(): String = accountPrefs.getString("name", "").toString()
+    fun setName(str: String) = accountPrefs.edit().putString("name", str).apply()
+
+}
+```
+
+- 로그인시 id, name, password를 SharedPreference로 저장 
+```kotlin
+// LoginActivity.kt
+with(MyApplication.prefs) {
+    setId(id)
+    setName(name)
+    setPw(password)
+}
+```
+
+- ProfileFragment에서 SharedPreference에 저장된 id와 name을 불러온 후, 깃허브 서버통신
+```kotlin
+// ProfileFragment.kt
+private fun initView() {
+    val name = MyApplication.prefs.getName()
+    val id = MyApplication.prefs.getId()
+    with(binding) {
+        tvName.text = name
+        tvId.text = id
+    }
+    with(ServiceCreator.githubService.getProfile(id)) {
+        enqueueUtil(
+            onSuccess = {
+                Glide.with(this@ProfileFragment).load(it.avatar_url).into(binding.ivProfile)
+                binding.tvIntroduction.text = it.bio
+            }
+        )
+    }
+}
+```
+
+- ProfileFollowerFragment에서 follower를 불러오는 github 서버통신 후 어댑터 초기화
+```kotlin
+// ProfileFollowerFragment.kt
+private fun initAdapter() {
+    followerAdapter = FollowerAdapter()
+    val id = MyApplication.prefs.getId()
+    ServiceCreator.githubService.getFollowers(id).apply {
+        enqueueUtil(
+            onSuccess = {
+                followerAdapter.setItems(it)
+            }
+        )
+    }
+    binding.rvFollowerList.adapter = followerAdapter
+}
+```
+
+- Response 공통된 부분 BaseResponse로 묶어주기
+```kotlin
+// BaseResponse.kt
+data class BaseResponse<T>(
+    val status: Int,
+    val message: String,
+    val data: T? = null
+)
+```
+
+```kotlin
+// SoptService.kt
+interface SoptService {
+    @POST("auth/signup")
+    fun postSignUp(
+        @Body body: RequestSignUp
+    ): Call<BaseResponse<ResponseSignUp>>
+
+    @POST("auth/signin")
+    fun postSignIn(
+        @Body body: RequestSignIn
+    ): Call<BaseResponse<ResponseSignIn>>
+}
+```

@@ -1,13 +1,26 @@
 <resources>
     <string name="app_name">Diablo</string>
-    <string name="id">아이디</string>
-    <string name="id_hint">아이디를 입력해주세요.</string>
+    <string name="id">깃허브 아이디</string>
+    <string name="id_hint">깃허브 아이디를 입력해주세요.</string>
     <string name="pw">비밀번호</string>
     <string name="pw_hint">비밀번호를 입력해주세요.</string>
-    <string name="signup">SIGNUP</string>
-    <string name="login">LOGIN</string>
+    <string name="signup">회원가입</string>
+    <string name="login">로그인</string>
     <string name="name">이름</string>
     <string name="name_hint">이름을 입력해주세요.</string>
     <string name="introduction">설명</string>
-
+    <string name="profile">프로필</string>
+    <string name="home">홈</string>
+    <string name="camera">카메라</string>
+    <string name="github">Github</string>
+    <string name="following">팔로잉</string>
+    <string name="follower">팔로워</string>
+    <string name="onboarding">온보딩</string>
+    <string name="next">다음으로</string>
+    <string name="start">시작하기</string>
+    <string name="welcome_message1">GitHub에 오신걸\n환영합니다!</string>
+    <string name="welcome_message2">GitHub에서 즐거운 시간\n보내시길 바랍니다!</string>
+    <string name="welcome_message3">GitHub를\n시작해봅시다!</string>
+    <string name="autologin">자동 로그인</string>
+    <string name="setting">환경설정</string>
 </resources>

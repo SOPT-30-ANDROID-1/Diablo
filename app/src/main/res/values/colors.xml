@@ -12,5 +12,15 @@
     <color name="dark_mint">#00ADB5</color>
     <color name="light_gray">#EEEEEE</color>
     <color name="light_mint">#00F4FF</color>
-
+    <color name="sopt_main_purple">#8040FF</color>
+    <color name="sopt_sub_purple">#BC9AFF</color>
+    <color name="sopt_white_purple">#FAF8FF</color>
+    <color name="sopt_light_gray">#DFDAED</color>
+    <color name="sopt_deep_gray">#444444</color>
+    <color name="sopt_dark_gray">#727272</color>
+    <color name="sopt_black">#333333</color>
+    <color name="sopt_hint_gray">#B5B5B5</color>
+    <color name="sopt_gray">#EFEFEF</color>
+    <color name="sopt_font_gray">#8F8F8F</color>
+    <color name="sopt_bg_gray">#F6F5F9</color>
 </resources>

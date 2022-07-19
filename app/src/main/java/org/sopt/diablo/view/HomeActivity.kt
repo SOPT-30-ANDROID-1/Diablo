@@ -3,10 +3,10 @@ package org.sopt.diablo.view
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentTransaction
 import org.sopt.diablo.R
 import org.sopt.diablo.databinding.ActivityHomeBinding
-import org.sopt.diablo.databinding.ActivityLoginBinding
+import org.sopt.diablo.view.main.profile.ProfileFollowerFragment
+import org.sopt.diablo.view.main.profile.ProfileRepoFragment
 
 class HomeActivity : AppCompatActivity() {
     private var position = FOLLOWER_POSITION
@@ -18,19 +18,19 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun initTransactionEvent() {
-        val followerListFragment = FollowerListFragment()
-        val repositoryListFragment = RepoListFragment()
-        supportFragmentManager.beginTransaction().add(R.id.container_list, followerListFragment).commit()
+        val followerFragment = ProfileFollowerFragment()
+        val repoFragment = ProfileRepoFragment()
+        supportFragmentManager.beginTransaction().add(R.id.container_list, followerFragment).commit()
 
-        binding.apply {
+        with(binding) {
             btnFollower.setOnClickListener {
                 if (position == REPO_POSITION) {
-                    fragmentManage(followerListFragment, FOLLOWER_POSITION)
+                    fragmentManage(followerFragment, FOLLOWER_POSITION)
                 }
             }
             btnRepo.setOnClickListener{
                 if (position == FOLLOWER_POSITION) {
-                    fragmentManage(repositoryListFragment, REPO_POSITION)
+                    fragmentManage(repoFragment, REPO_POSITION)
                 }
             }
         }
